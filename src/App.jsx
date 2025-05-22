@@ -1,15 +1,25 @@
-import React from 'react'
-import {Admin, ListGuesser, Resource} from "react-admin"
-import fakeDataProvider from 'ra-data-fakerest'
-import {data} from "./data"
 import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import { AuthProvider } from './Context/authContext'
+import { ProtectedRoute } from './Components/PortectedRoute/ProtectedRoute'
 
-const dataProvider = fakeDataProvider(data, true);
+import Intro from './Components/Intro/Intro'
+import Registro from './Components/Registro/Registro'
 
 const App = () => {
   return (
     <>
+      <AuthProvider>
+        <Routes>
+          
 
+          <Route path='/register' element = {<Registro />} />
+          <Route path='/' element = {<Intro />} />
+          
+          
+        </Routes>
+      </AuthProvider>
+     
     </>
   )
 }
