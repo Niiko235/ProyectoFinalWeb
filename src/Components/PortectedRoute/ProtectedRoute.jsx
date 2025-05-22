@@ -7,7 +7,7 @@ export function ProtectedRoute({children}){
 
     if(loading) return <h1>cargando</h1>
 
-    if(!user) return <Navigate to={'/login'}/>
+    if(!user) return <Navigate to={'/'}/>
 
     return <>{children}</>
 }

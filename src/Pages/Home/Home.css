@@ -8,11 +8,11 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-#intro-Circulos{
+#home-Circulos{
     display: flex;
 }
 
-#intro-Circulos_Amarrillo{
+#home-Circulos_Amarrillo{
     width: 100px;
     height: 100px;
     background-color: #f5f43c;
@@ -25,7 +25,7 @@
 
 }
 
-#intro-Circulos_Azul{
+#home-Circulos_Azul{
     width: 200px;
     height: 200px;
     background-color: #3985f4;
@@ -37,7 +37,7 @@
     z-index: 1;
 }
 
-#intro-Circulos_Amarrillo-2{
+#home-Circulos_Amarrillo-2{
     width: 200px;
     height: 200px;
     background-color: #f5f43c;
@@ -48,7 +48,7 @@
     top: 150px;
 }
 
-#main-intro{
+#main-home{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -56,7 +56,7 @@
     margin-top: 150px;
 }
 
-#intro-titulo{
+#home-titulo{
     position: relative;
     color: #ffffff;
     p{
@@ -66,7 +66,7 @@
     }
 }
 
-#intro-opciones{
+#home-opciones{
     display: flex;
     gap: 40px;
     position: relative;
