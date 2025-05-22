@@ -9,11 +9,7 @@ const dataProvider = fakeDataProvider(data, true);
 const App = () => {
   return (
     <>
-      <Admin dataProvider={dataProvider}>
-        <Resource name='posters' list={ListGuesser}/>
-        <Resource name='users' list={ListGuesser}/>
-        
-      </Admin>
+
     </>
   )
 }
