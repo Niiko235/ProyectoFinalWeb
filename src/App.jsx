@@ -7,7 +7,7 @@ import Registro from './Pages/Registro/Registro'
 import Usuarios from './Pages/Usuarios/Usuarios'
 import Home from './Pages/Home/Home'
 
-const App = () => {
+function App () {
   return (
     <>
       <AuthProvider>
