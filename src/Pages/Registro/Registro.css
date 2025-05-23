@@ -76,16 +76,20 @@
                 .Registro-contenedor_registrarse{
                     border: none;
                     background-color: #7e01f5;
-                    border-radius: 5px;
+                    border-radius: 15px;
                     padding: 10px;
-                    font-size: 15px;
+                    font-size: 20px;
                     margin-top: 25px;
                     width: 300px;
-                    height: 35px;
+                    height: 45px;
                     color: #ffffff;
+                }
+
+                .Registro-contenedor_registrarse:hover{
+                    cursor: pointer;
+                    border: 20px black;
                 }
             }
         }
     }
-    
 }

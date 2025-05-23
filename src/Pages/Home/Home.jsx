@@ -11,16 +11,16 @@ const Home = () => {
   return (
     <>
         <div id='home-Circulos'>
-            <div id='home-Circulos_Amarrillo' className='animte__animated  animate__bounceIn'></div>
-            <div id='home-Circulos_Azul' className='animte__animated  animate__bounceIn'></div>
-            <div id='home-Circulos_Amarrillo-2' className='animte__animated  animate__bounceIn'></div>
+            <div id='home-Circulos_Amarrillo' className='animate__animated  animate__bounceIn'></div>
+            <div id='home-Circulos_Azul' className='animate__animated  animate__bounceIn'></div>
+            <div id='home-Circulos_Amarrillo-2' className='animate__animated  animate__bounceIn'></div>
         </div>
         <div id='main-home'>      
             <div id='home-titulo'>
-                <h1 className='animate__animated animate__slideInUp'>Bienvenido a Uniformación Amazonica</h1>
-                <p className='animate__animated animate__slideInUp'>Seleccione una opcion para continuar</p>
+                <h1 className='animate__animated animate__zoomIn'>Bienvenido a Uniformación Amazonica</h1>
+                <p className='animate__animated animate__zoomIn'>Seleccione una opcion para continuar</p>
             </div>
-            <div id='home-opciones' className='animate__animated animate__slideInUp'>
+            <div id='home-opciones' className='animate__animated animate__zoomIn'>
                 <div className='cartas'>
                     <div id='cartas-login'>
                         {<LoginIcon sx={{background: '#ffffff', fontSize: 50}}/>}
@@ -29,7 +29,7 @@ const Home = () => {
                         <h2>Iniciar Sesión</h2>
                         <p>Ingrese a su cuenta ya creada</p>
                     </div>
-                    <Link to={"/inicio"} id='cartas-boton'>
+                    <Link to={"/login"} id='cartas-boton'>
                         Iniciar Sesión
                     </Link>
                 </div>
