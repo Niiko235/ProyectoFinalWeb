@@ -1,13 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../Context/authContext';
 import { useNavigate, Link } from 'react-router-dom';
-
-
 import './Inicio.css'
-
-
-
-
 const Inicio = () => {
 
   const [user, setUser] = useState({
@@ -38,8 +32,6 @@ const Inicio = () => {
       // console.log('cagaste');
       alert("Credenciales invalidas")
       // setError(error.message);
-      
-      
     }
   }
 

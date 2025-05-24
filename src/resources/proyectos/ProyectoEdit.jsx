@@ -1,6 +1,6 @@
 // src/resources/proyectos/ProyectoEdit.jsx
 
-import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, DateInput, required } from 'react-admin';
+import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, DateInput, required, ReferenceArrayInput, SelectArrayInput } from 'react-admin';
 
 const ProyectoEdit = () => (
   <Edit title="Editar Proyecto">
@@ -21,7 +21,7 @@ const ProyectoEdit = () => (
 
       {/* Observaciones o estado actual */}
       <TextInput multiline source="observaciones" />
-      <SelectInput 
+      <SelectInput
         source="estado"
         choices={[
           { id: 'Formulación', name: 'Formulación' },
@@ -31,6 +31,13 @@ const ProyectoEdit = () => (
           { id: 'Finalizado', name: 'Finalizado' },
         ]}
       />
+      <ReferenceArrayInput
+        label="Estudiantes"
+        source="estudiantesIds"
+        reference="estudiantes"
+      >
+        <SelectArrayInput optionText="nombre" />
+      </ReferenceArrayInput>
     </SimpleForm>
   </Edit>
 );

@@ -1,4 +1,4 @@
-import { Create, SimpleForm, TextInput, DateInput, ReferenceInput, SelectInput } from 'react-admin';
+import { Create, SimpleForm, TextInput, DateInput, ReferenceInput, SelectInput, ReferenceArrayInput, SelectArrayInput } from 'react-admin';
 
 const ProyectoCreate = () => (
   <Create>
@@ -8,10 +8,12 @@ const ProyectoCreate = () => (
       <TextInput multiline source="objetivos" />
       <TextInput multiline source="cronograma" />
       <TextInput source="presupuesto" />
+
       <ReferenceInput source="docenteId" reference="usuarios">
         <SelectInput optionText="nombre" />
       </ReferenceInput>
       <TextInput source="institucion" />
+
     </SimpleForm>
   </Create>
 );

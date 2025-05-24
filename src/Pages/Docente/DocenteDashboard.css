@@ -1,0 +1,17 @@
+
+.Dash-boton{
+    display: flex;
+    height: 20vh;
+    align-items: center;
+
+    .boton-cerrar-sesion{
+        background-color:#0f2fc0;
+        width: 150px;
+        height: 45px;
+        color: #ffffff;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+}
