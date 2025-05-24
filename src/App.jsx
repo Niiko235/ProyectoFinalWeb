@@ -16,19 +16,18 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Home />} />
-        
-        <Route path="/login" element={
-          <PublicRoute>
-            <Inicio />
-          </PublicRoute>} />
-        
-        <Route path="/register" element={
-          <PublicRoute>
-            <Registro />
-          </PublicRoute>} />
+        {/* Las rutas que están envueltan por las etiquetas PublicRoute garantizan que el login */}
+        {/* o la página principal no aparezca mientras se está dentro de una sesión. De una vez */}
+        {/* lo redigirá la página principal del dashboard determinado por el rol. */}
+
+        <Route path="/" element={<PublicRoute />}>
+          <Route index element={<Home />} />                {/* Renders at "/" */}
+          <Route path="login" element={<Inicio />} />       {/* Renders at "/login" */}
+          <Route path="register" element={<Registro />} />  {/* Renders at "/register" */}
+        </Route>
 
 
+        {/* Rutas determinadas para administración por contenido dependiendo del rol */}
         <Route
           path="/admin/*"
           element={

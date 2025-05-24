@@ -1,7 +1,7 @@
 import { useAuth } from '../../Context/authContext';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
-export function PublicRoute({ children }) {
+export function PublicRoute() {
   const { user, rol, loading } = useAuth();
 
   if (loading) return <h1>Cargando...</h1>;
@@ -12,5 +12,6 @@ export function PublicRoute({ children }) {
   if (user && rol === 'profesor') return <Navigate to="/docente" />;
   if (user && rol === 'estudiante') return <Navigate to="/estudiante" />;
 
-  return children;
+  // Renderiza la ruta hija (Home, Login, Register)
+  return <Outlet/>;
 }
