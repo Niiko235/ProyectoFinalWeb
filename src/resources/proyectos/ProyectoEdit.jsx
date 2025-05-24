@@ -15,7 +15,7 @@ const ProyectoEdit = () => (
       <TextInput source="institucion" />
 
       {/* Referencia al docente que lo creó */}
-      <ReferenceInput source="docenteId" reference="usuarios">
+      <ReferenceInput source="docenteId" reference="docentes">
         <SelectInput optionText="nombre" />
       </ReferenceInput>
 
@@ -31,13 +31,14 @@ const ProyectoEdit = () => (
           { id: 'Finalizado', name: 'Finalizado' },
         ]}
       />
-      <ReferenceArrayInput
+      
+      {/* <ReferenceArrayInput
         label="Estudiantes"
         source="estudiantesIds"
         reference="estudiantes"
       >
         <SelectArrayInput optionText="nombre" />
-      </ReferenceArrayInput>
+      </ReferenceArrayInput> */}
     </SimpleForm>
   </Edit>
 );

@@ -6,7 +6,6 @@ const docenteProyectosEdit = () => (
     <Edit title="Editar Proyecto">
         <SimpleForm>
             <TextInput disabled source="id" />
-
             <TextInput source="titulo" validate={required()} />
             <TextInput source="area" />
             <TextInput multiline source="objetivos" />

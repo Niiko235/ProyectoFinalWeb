@@ -7,6 +7,10 @@ import ProyectoList from '../../resources/proyectos/ProyectoList';
 import ProyectoEdit from '../../resources/proyectos/ProyectoEdit';
 import ProyectoCreate from '../../resources/proyectos/ProyectoCreate';
 
+import docenteUsuarioList from '../../resources/docenteUsuario/docenteUsuarioList';
+import docenteUsuarioCreate from '../../resources/docenteUsuario/docenteUsuarioCreate';
+import docenteUsuarioEdit from '../../resources/docenteUsuario/docenteUsuarioEdit';
+
 import './AdminPanel.css'
 
 const AdminPanel = () => {
@@ -31,13 +35,19 @@ const AdminPanel = () => {
 
   return (
     <Admin basename="/admin" dataProvider={dataProvider} dashboard={Dashboard}>
+      
       <Resource
         name="proyectos"
         list={ProyectoList}
         edit={ProyectoEdit}
         create={ProyectoCreate}
       />
-      
+      <Resource 
+        name="usuarios"
+        list={docenteUsuarioList}
+        edit={docenteUsuarioEdit}
+        create={docenteUsuarioCreate}
+      />  
     </Admin>
   );
 };

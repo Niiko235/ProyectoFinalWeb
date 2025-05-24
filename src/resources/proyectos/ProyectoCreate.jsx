@@ -9,7 +9,7 @@ const ProyectoCreate = () => (
       <TextInput multiline source="cronograma" />
       <TextInput source="presupuesto" />
 
-      <ReferenceInput source="docenteId" reference="usuarios">
+      <ReferenceInput source="docenteId" reference="docentes">
         <SelectInput optionText="nombre" />
       </ReferenceInput>
       <TextInput source="institucion" />
