@@ -15,10 +15,12 @@ function App() {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<Home />} />
+        
         <Route path="/login" element={
           <PublicRoute>
             <Inicio />
           </PublicRoute>} />
+        
         <Route path="/register" element={
           <PublicRoute>
             <Registro />
