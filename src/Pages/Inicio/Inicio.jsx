@@ -33,7 +33,7 @@ const Inicio = () => {
     // setError('');
     try{
       await login(user.email, user.password)
-      navigate("/user")
+      // navigate("/user")
     }catch (error){
       // console.log('cagaste');
       alert("Credenciales invalidas")

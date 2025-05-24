@@ -1,6 +1,6 @@
 import { List, Datagrid, TextField, EmailField, EditButton, DeleteButton } from 'react-admin';
 
-export const UsuarioList = () => (
+const UsuarioList = () => (
   <List>
     <Datagrid>
       <TextField source="nombre" />
@@ -11,3 +11,5 @@ export const UsuarioList = () => (
     </Datagrid>
   </List>
 );
+
+export default UsuarioList;
