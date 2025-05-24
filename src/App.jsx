@@ -10,6 +10,8 @@ import Inicio from './Pages/Inicio/Inicio';
 import Registro from './Pages/Registro/Registro';
 import Home from './Pages/Home/Home';
 
+import './App.css'
+
 function App() {
   return (
     <AuthProvider>
