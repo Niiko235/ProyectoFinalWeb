@@ -47,10 +47,11 @@ const dataProvider = {
 
   getOne: async (resource, { id }) => {
     await delay(200);
-    return {
-      data: data[resource].find(item => item.id === id),
-    };
+    const found = data[resource].find(item => item.id === Number(id));
+    if (!found) throw new Error('Elemento no encontrado');
+    return { data: found };
   },
+
 
   create: async (resource, { data: newData }) => {
     await delay(300);

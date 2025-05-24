@@ -1,22 +1,31 @@
+import { AdminContext, Admin, Resource } from 'react-admin';
 import { useAuth } from '../../Context/authContext';
-import { useNavigate } from 'react-router-dom';
+import dataProvider from '../../dataProvider';
+
+import ProyectoList from '../../resources/proyectos/ProyectoList';
+import ProyectoEdit from '../../resources/proyectos/ProyectoEdit';
+import ProyectoCreate from '../../resources/proyectos/ProyectoCreate';
 
 const AdminPanel = () => {
-  const { user, rol, logout } = useAuth();
-  const navigate = useNavigate();
+  const { rol, loading } = useAuth();
 
-  const handleLogout = async () => {
-    await logout();
-    navigate('/login');
-  };
+  if (loading) return <p>Cargando...</p>;
+  if (rol !== 'coordinador') return <p>Acceso denegado</p>;
+
+  const Dashboard = () => (<div style={{ padding: '2rem' }}>
+    <h1>Bienvenido al Panel de Coordinador</h1>
+    <p>Desde aquí puedes gestionar proyectos, usuarios y más.</p>
+  </div>);
 
   return (
-    <div>
-      <h1>Hola, {user?.email}</h1>
-      <p>Rol: {rol}</p>
-
-      <button onClick={handleLogout}>Cerrar sesión</button>
-    </div>
+    <Admin basename="/admin" dataProvider={dataProvider} dashboard={Dashboard}>
+      <Resource
+        name="proyectos"
+        list={ProyectoList}
+        edit={ProyectoEdit}
+        create={ProyectoCreate}
+      />
+    </Admin>
   );
 };
 
