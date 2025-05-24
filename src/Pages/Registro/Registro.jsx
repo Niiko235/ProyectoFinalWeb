@@ -8,7 +8,7 @@ const Registro = () => {
     const [userRegister, setUserRegister] = useState({
         email : '',
         password : '',
-        name : '',
+        name : '',  
         lastname : '',
         phone : '',
         dni : '',
