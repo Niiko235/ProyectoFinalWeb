@@ -1,37 +1,58 @@
-import './App.css'
-import { Route, Routes } from 'react-router-dom'
-import { AuthProvider } from './Context/authContext'
-import { ProtectedRoute } from './Components/PortectedRoute/ProtectedRoute'
+import { Route, Routes } from 'react-router-dom';
+import { AuthProvider, useAuth } from './Context/authContext';
+import { ProtectedRoute } from './Components/ProtectedRoute/ProtectedRoute';
+import { PublicRoute } from './Components/PublicRoute/PublicRoute';
 
-import Registro from './Pages/Registro/Registro'
-import Usuarios from './Pages/Usuarios/Usuarios'
-import Home from './Pages/Home/Home'
-import Inicio from './Pages/Inicio/Inicio'
+import AdminPanel from './Pages/Admin/AdminPanel';
+import DocenteDashboard from './Pages/Docente/DocenteDashboard';
+import EstudianteDashboard from './Pages/Estudiante/EstudianteDashboard';
+import Inicio from './Pages/Inicio/Inicio';
+import Registro from './Pages/Registro/Registro';
+import Home from './Pages/Home/Home';
 
-
-const App = () => {
+function App() {
   return (
-    <>
-      <AuthProvider>
-        <Routes>
-          {/* en usuers colocaremos todas las rutas protegidas -> buscar si hay otro metodo */}
-          <Route path='/user'
-            element = {
-              <ProtectedRoute>
-                <Usuarios />
-              </ProtectedRoute>
-            }
-          />
-          {/* aqui van las rutas que no requieren iniciar sesion para verlas */}
-          <Route path='/register' element = {<Registro />} />
-          <Route path='/login' element = {<Inicio />} />
-          <Route path='/' element = {<Home />} />
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={
+          <PublicRoute>
+            <Inicio />
+          </PublicRoute>} />
+        <Route path="/register" element={
+          <PublicRoute>
+            <Registro />
+          </PublicRoute>} />
 
-        </Routes>
-      </AuthProvider>
-     
-    </>
-  )
+
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRoles={['coordinador']}>
+              <AdminPanel />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/docente"
+          element={
+            <ProtectedRoute allowedRoles={['profesor']}>
+              <DocenteDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/estudiante"
+          element={
+            <ProtectedRoute allowedRoles={['estudiante']}>
+              <EstudianteDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+      </Routes>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
