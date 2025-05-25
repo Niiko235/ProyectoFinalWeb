@@ -1,5 +1,6 @@
 import { useAuth } from '../../Context/authContext';
 import { useNavigate } from 'react-router-dom';
+import Tema from '../../resources/Tema/Tema';
 
 const EstudianteDashboard = () => {
   const { user, rol, logout } = useAuth();
