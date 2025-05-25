@@ -11,7 +11,7 @@ const DataProviderDocente = (user) =>({
 
   getList: async (resource) => {
 
-
+    
     let q = collection(db, resource);
 
       q = query(q, where("leader", "==", user.uid));
@@ -29,40 +29,73 @@ const DataProviderDocente = (user) =>({
       total: data.length,
     };
   },
-
-  delete: async (resource, params) => {
-
-    // trae la coleccion de ese id
-    const docRef = doc(db, resource, params.id);
-
+  getOne: async (resource, { id }) => {
+    await delay(200);
+    const docRef = doc(db, resource, id);
     const docSnap = await getDoc(docRef);
 
-    console.log(docSnap);
-    
-    // if (!docSnap.exists()) {
-    //   throw new Error("Proyecto no encontrado");
-    // }
+    if (docSnap.exists()) {
+      return { data: { id: docSnap.id, ...docSnap.data() } };
+    } else {
+      throw new Error("Documento no encontrado");
+    }
+  },
 
-    // const proyectoData = docSnap.data();
 
-    // // 2. Recorrer el array de progresses y eliminar cada uno
-    // if (proyectoData.progresses && Array.isArray(proyectoData.progresses)) {
-    //   const progressesIds = proyectoData.progresses;
+  getMany: async (resource, { ids }) => {
+  try {
+    // 1. Crear un array de promesas para obtener cada documento
+    const docsPromises = ids.map(id => 
+      getDoc(doc(db, resource, id))
+    );
 
-    //   // Usamos Promise.all para esperar a que se eliminen todos
-    //   await Promise.all(
-    //     progressesIds.map(async (progressId) => {
-    //       const progressDocRef = doc(db, "progresses", progressId);
-    //       await deleteDoc(progressDocRef);
-    //     })
-    //   );
-    // }
+    // 2. Ejecutar todas las consultas en paralelo
+    const docsSnapshots = await Promise.all(docsPromises);
 
-    // // 3. Finalmente, eliminar el proyecto
-    // await deleteDoc(docRef);
+    // 3. Procesar resultados
+    const data = docsSnapshots.map((docSnap, index) => {
+      if (!docSnap.exists()) {
+        throw new Error(`Documento ${ids[index]} no encontrado`);
+      }
+      return { id: docSnap.id, ...docSnap.data() };
+    });
 
-    // return { data: { id: params.id } };
+    return { data };
+  } catch (error) {
+    console.error(`Error en getMany (${resource}):`, error);
+    throw error;
   }
+  },
+  // ,
+  // delete: async (resource, {id}) => {
+  //     await delay(200);
+  //     const docRef = doc(db, resource, id);
+
+  //     await deleteDoc(docRef);
+  //     console.log("eliminado");
+      
+  //     return { data: { id: id } }; 
+  // }
+  
+  delete: async (resource, { id }) => {
+        try {
+            console.log(`Eliminando ${resource}/${id}`); // Debug
+            const docRef = doc(db, resource, id);
+            
+            // Verificación opcional de existencia
+            const docSnap = await getDoc(docRef);
+            if (!docSnap.exists()) {
+                throw new Error("Documento no encontrado");
+            }
+
+            await deleteDoc(docRef);
+            return { data: { id } }; // Formato correcto
+            
+        } catch (error) {
+            console.error("Error en delete:", error);
+            throw error;
+        }
+    }
 }); 
 
 export default DataProviderDocente;

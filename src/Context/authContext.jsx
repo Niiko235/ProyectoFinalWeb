@@ -34,17 +34,17 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const unsubonscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);
-            console.log('Usuario autenticado:', currentUser);
+            // console.log('Usuario autenticado:', currentUser);
 
             if (currentUser) {
                 const ref = doc(db, 'users', currentUser.uid);
                 const snap = await getDoc(ref);
                 const data = snap.data();
-                console.log('Datos del usuario:', data.rol);
+                // console.log('Datos del usuario:', data.rol);
                 setRol(data?.rol || null);
 
                 // Redirección automática por rol
-                console.log('location.pathname', location.pathname);
+                // console.log('location.pathname', location.pathname);
                 if (data.rol && location.pathname === '/login') {
                     if (data.rol === "coordinador") navigate('/admin');
                     else if (data.rol === "profesor") navigate('/docente');
@@ -64,7 +64,7 @@ export function AuthProvider({ children }) {
     //logearse
     const login = async (email, password, user) => {
         const userCredentials = await signInWithEmailAndPassword(auth, email, password);
-        console.log('location.pathname', location.pathname);
+        // console.log('location.pathname', location.pathname);
         if (rol && location.pathname === '/login') {
             if (rol === "coordinador") navigate('/admin');
             else if (rol === "profesor") navigate('/docente');
