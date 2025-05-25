@@ -5,16 +5,6 @@ import { useEffect, useState } from 'react';
 
 const docenteProyectosCrear = () => {
 
-  // useEffect(() => {
-  //   if (user) {
-  //     setInitialValues({
-  //       docenteId: user.id, // Asegúrate que `user.id` esté disponible en tu authContext
-  //     });
-  //   }
-  // }, [user]);
-
-  // if (!initialValues) return null; // o un loading spinner
-
   return (
 
     <Create>
