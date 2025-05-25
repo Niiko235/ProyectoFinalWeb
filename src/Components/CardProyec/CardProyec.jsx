@@ -9,12 +9,14 @@ import CardActions from '@mui/material/CardActions';
 
 
 const CardProyect =({proyecto})=> {
+  console.log(proyecto);
+  
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {proyecto.title}
+            {proyecto.titulo}
           </Typography>
         </CardContent>
       </CardActionArea>
