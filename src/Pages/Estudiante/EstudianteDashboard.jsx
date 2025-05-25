@@ -19,23 +19,39 @@ const EstudianteDashboard = () => {
   };
 
   useEffect(() => {
-    // Suponiendo que Juan tiene id 1
-    dataProvider.getList("proyectos", {
-      filter: { teamId: 2 }
-    }).then(response => {
-      setProyectos(response.data);
-    });
-  }, []);
+    if (!user) return;
+
+    const fetchData = async () => {
+      const { data: estudiantes } = await dataProvider.getList("estudiantes");
+
+      const estudiante = estudiantes.find(
+        est => est.correo.toLowerCase() === user.email.toLowerCase()
+      );
+
+      console.log(estudiante);      
+      if (!estudiante) return;
+
+      const { data: proyectosEstudiante } = await dataProvider.getList("proyectos", {
+        filter: { loggedUserId: estudiante.id }
+      });
+      console.log(proyectosEstudiante);
+      
+      setProyectos(proyectosEstudiante);
+    };
+
+    fetchData();
+  }, [user]);
+
+
+
 
   const Dashboard = () => (
     <div className='Dashdoce-principal'>
-      <h1>Hola, {user?.email}</h1>
+      <h1>Hola, {user.email} {rol}</h1>
       <p>Rol: {rol}</p>
-      <div className='Dashcode-proyectos'>
-        {proyectos.map(proy => (
-            <CardProyect key={proy.id} proyecto={proy} />
-          ))}
-      </div>
+      {proyectos.map(proyecto => (
+        <CardProyect key={proyecto.id} proyecto={proyecto} />
+      ))}
       <div className='Dash-boton'>
         <button onClick={handleLogout} className='boton-cerrar-sesion'>Cerrar sesión</button>
       </div>

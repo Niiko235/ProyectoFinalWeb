@@ -50,17 +50,17 @@ const data = {
       telefono: 3143924897,
       usuario: "cristian",
       contraseña: "1234",
-      rol: "Estudiante"
+      rol: "estudiante"
     },
     {
       id: 2, nombre: "Carlos",
       apellido: "Pérez",
       documento: 1025487632,
-      correo: "carlos@edu.com",
+      correo: "juan.guzman@udla.edu.co",
       telefono: 3114456789,
       usuario: "cperez",
       contraseña: "docente123",
-      rol: "Estudiante"
+      rol: "estudiante"
     },
     {
       id: 3, nombre: "Laura",
@@ -70,7 +70,7 @@ const data = {
       telefono: 3123345566,
       usuario: "lgomez",
       contraseña: "laura2024",
-      rol: "Docente"
+      rol: "docente"
     },
     {
       id: 4, nombre: "Diana",
@@ -80,7 +80,7 @@ const data = {
       telefono: 3137788990,
       usuario: "drodriguez",
       contraseña: "coord456",
-      rol: "Docente"
+      rol: "docente"
     },
     {
       id: 5, nombre: "José",
@@ -90,7 +90,7 @@ const data = {
       telefono: 3109988776,
       usuario: "jmartinez",
       contraseña: "est123",
-      rol: "Estudiante"
+      rol: "estudiante"
     },
     {
       id: 6, nombre: "Ana",
@@ -100,7 +100,17 @@ const data = {
       telefono: 3176655443,
       usuario: "aruiz",
       contraseña: "ana456",
-      rol: "Estudiante"
+      rol: "estudiante"
+    },
+    {
+      id: 7, nombre: "Juan",
+      apellido: "Guzmán",
+      documento: 1045678901,
+      correo: "juan.guzman@udla.edu.co",
+      telefono: 3176655443,
+      usuario: "juan.guzman@udla.edu.co",
+      contraseña: "faldfadlfj",
+      rol: "estudiante"
     }
   ]
 };
@@ -131,6 +141,14 @@ const dataProvider = {
 
       // Aplicar filtros personalizados
       if (resource === "proyectos") {
+        // Filtrar por usarioId
+        if (filter.loggedUserId) {
+          items = items.filter(p =>
+            p.team.some(miembro => miembro.id === Number(filter.loggedUserId))
+          );
+        }
+
+
         if (filter.titulo) {
           const keywords = filter.titulo.toLowerCase().split(' ');
 
