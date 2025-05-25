@@ -31,9 +31,11 @@ const EstudianteDashboard = () => {
     <div className='Dashdoce-principal'>
       <h1>Hola, {user?.email}</h1>
       <p>Rol: {rol}</p>
-      {proyectos.map(proy => (
-          <CardProyect key={proy.id} proyecto={proy} />
-        ))}
+      <div className='Dashcode-proyectos'>
+        {proyectos.map(proy => (
+            <CardProyect key={proy.id} proyecto={proy} />
+          ))}
+      </div>
       <div className='Dash-boton'>
         <button onClick={handleLogout} className='boton-cerrar-sesion'>Cerrar sesión</button>
       </div>
@@ -43,9 +45,6 @@ const EstudianteDashboard = () => {
   return (
     <Admin basename="/estudiante" dashboard={Dashboard} theme={Tema}>
       <Resource name="proyectos">
-        <div>
-          HOLA
-        </div>
       </Resource>
     </Admin>
   );

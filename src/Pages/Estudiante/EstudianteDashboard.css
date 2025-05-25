@@ -4,13 +4,13 @@
     background-color: #ffffff;
     padding: 20px;
 
-    .Dashcode-proyectos{
+    /* .Dashcode-proyectos{
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
         justify-content: center;
         margin: 20px;
-    }
+    } */
 
     .Dash-boton {
         display: flex;
