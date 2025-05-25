@@ -1,14 +1,28 @@
 import { useParams } from 'react-router-dom';
 import { List, Datagrid, TextField, ReferenceField, EditButton } from 'react-admin';
 import ModalBoton from '../Modal/Modal';
-import './Popa.css'
+import DetalleAvance from '../DetalleAvance/DetalleAvance'
+import './Popa.css';
+import { useState } from 'react';
 
 const Popa = ({ proyectos }) => {
     const { id } = useParams();
+    const [avanceSeleccionado, setAvanceSeleccionado] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
     const proyecto = proyectos.find((p) => p.id.toString() === id);
 
     if (!proyecto) return <p>Proyecto no encontrado</p>;
+
+    const handleFilaClick = (avance) => {
+        setAvanceSeleccionado(avance);
+        setModalOpen(true);
+    };
+
+    const cerrarModal = () => {
+        setModalOpen(false);
+        setAvanceSeleccionado(null);
+    };
 
     return (
         <>
@@ -41,7 +55,7 @@ const Popa = ({ proyectos }) => {
                         <tbody>
                             {proyecto.avances && proyecto.avances.length > 0 ? (
                                 proyecto.avances.map((avance, index) => (
-                                    <tr key={index}>
+                                    <tr key={index} onClick={() => handleFilaClick(avance)} style={{ cursor: 'pointer' }}>
                                         <td>{avance.nombre}</td>
                                         <td>{avance.descr}</td>
                                         <td>{avance.fecha}</td>
@@ -56,6 +70,12 @@ const Popa = ({ proyectos }) => {
                     </table>
                 </div>
             </div>
+
+            <DetalleAvance
+                open={modalOpen}
+                onClose={cerrarModal}
+                avance={avanceSeleccionado}
+            />
         </>
     );
 };
