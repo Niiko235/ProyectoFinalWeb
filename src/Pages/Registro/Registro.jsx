@@ -32,7 +32,7 @@ const Registro = () => {
         try {
             const userCredentials = await signup(userRegister.email, userRegister.password);
             const uid = userCredentials.user.uid;
-            await registrarUsers(userRegister.name, userRegister.lastname, userRegister.dni, userRegister.phone, uid, userRegister.rol, userRegister.nickname);
+            await registrarUsers(userRegister.name, userRegister.lastname, userRegister.dni, userRegister.phone, uid, userRegister.rol, userRegister.nickname, userRegister.email, userRegister.password);
             console.log(user);
 
             navigate('/')

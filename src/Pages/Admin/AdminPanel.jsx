@@ -1,6 +1,6 @@
 import { AdminContext, Admin, Resource, CustomRoutes } from 'react-admin';
 import { useAuth } from '../../Context/authContext';
-import dataProvider from '../../dataProvider';
+
 import { Route, useNavigate } from 'react-router-dom';
 import Tema from '../../resources/Tema/Tema';
 
@@ -17,6 +17,9 @@ import docenteUsuarioEdit from '../../resources/docenteUsuario/docenteUsuarioEdi
 
 import './AdminPanel.css'
 
+
+import dataProvider from '../../dataProvider';
+import DataProviderAdmin from './DataProviderAdmin';
 
 const AdminPanel = () => {
   const { rol, loading, logout} = useAuth();
@@ -38,23 +41,25 @@ const AdminPanel = () => {
     </div>
   </div>);
 
+  
+
   return (
-    <Admin basename="/admin" dataProvider={dataProvider} dashboard={Dashboard} theme={Tema}>
+    <Admin basename="/admin" dataProvider={DataProviderAdmin} dashboard={Dashboard} theme={Tema}>
       
       <Resource
-        name="proyectos"
+        name="projects"
         list={coordinadorProyectoList}
         edit={coordinadorProyectoEdit}
         create={coordinadorProyectoCreate}
       />
       <Resource 
-        name="usuarios"
+        name="users"
         list={docenteUsuarioList}
         edit={docenteUsuarioEdit}
         create={docenteUsuarioCreate}
       />  
 
-      {/* Ruta personalizada */}
+      Ruta personalizada
       <CustomRoutes>
         <Route path="/proyectos/:id/vista" element={<CoordinadorProyectoVista />} />
       </CustomRoutes>
