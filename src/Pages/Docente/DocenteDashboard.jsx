@@ -15,6 +15,7 @@ import { Admin, Resource} from "react-admin";
 import './DocenteDashboard.css'
 
 const DocenteDashboard = () => {
+  
   const { user, rol, logout } = useAuth();
   const navigate = useNavigate();
 

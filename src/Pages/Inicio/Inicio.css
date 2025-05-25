@@ -1,124 +1,120 @@
-#Inicio-contenedor{
+#Inicio-contenedor {
 
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    background-color: #3985f4;
 
-    #Inicio-Circulos{
+    #Inicio-Circulos {
         display: flex;
-    
-        #Inicio-Circulos_Amarrillo{
+
+        #Inicio-Circulos_Amarrillo {
             width: 100px;
             height: 100px;
-            background-color: #f5f43c;
+            background-color: #f7ff00;
             border-radius: 50%;
-            
+
             position: absolute;
-            left: 250px;
-            top: 480px;
+            left: 20%;
+            top: 80%;
             z-index: 2;
         }
-    
-        #Inicio-Circulos_Amarrillo-2{
+
+        #Inicio-Circulos_Amarrillo-2 {
             width: 80px;
             height: 80px;
-            background-color: #f5f43c;
+            background-color: #f7ff00;
             border-radius: 50%;
-            
+
             position: absolute;
-            left: 100px;
-            top: 20px;
+            left: 12%;
+            top: 7%;
         }
-    
-        #Inicio-Circulos_Amarrillo-3{
+
+        #Inicio-Circulos_Amarrillo-3 {
             width: 50px;
             height: 50px;
-            background-color: #f5f43c;
+            background-color: #f7ff00;
             border-radius: 50%;
-            
+
             position: absolute;
-            left: 1200px;
-            top: 300px;
+            left: 90%;
+            top: 50%;
         }
-    
-        #Inicio-Circulos_Azul{
+
+        #Inicio-Circulos_Azul {
             width: 50px;
             height: 50px;
-            background-color: #3985f4;
+            background-color: #0033cc;
             border-radius: 50%;
-            
+
             position: absolute;
-            left: 300px;
-            top: 250px;
+            left: 23%;
+            top: 52%;
             z-index: 1;
         }
-    
-        #Inicio-Circulos_Azul-2{
+
+        #Inicio-Circulos_Azul-2 {
             width: 70px;
             height: 70px;
-            background-color: #3985f4;
+            background-color: #0033cc;
             border-radius: 50%;
-            
+
             position: absolute;
-            left: 1000px;
-            top: 30px;
+            left: 75%;
+            top: 6%;
             z-index: 1;
         }
-    
-        #Inicio-Circulos_Azul-3{
+
+        #Inicio-Circulos_Azul-3 {
             width: 100px;
             height: 100px;
-            background-color: #3985f4;
+            background-color: #0033cc;
             border-radius: 50%;
-            
+
             position: absolute;
-            left: 1100px;
-            top: 450px;
+            left: 78%;
+            top: 75%;
             z-index: 1;
         }
     }
 
-    main{
-        width: 40vw;
-        height: 75vh;
-        margin-bottom: 150px;
+    #Inicio-main {
+        width: 45vw;
+        height: 70vh;
+        background-color: #ffffff;
+        border-radius: 20px;
+        z-index: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        #Inicio-contenedor_titulos{
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            z-index: 3;
-            border-radius: 20px;
+        #Inicio-contenedor_titulos {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding-top: 40px;
 
-            h1{
-                background-color: #ffffff;
-                border-radius: 20px;
+            h1 {
+                text-align: center;
             }
 
-            p{
-                background-color: #ffffff;
+            #Inicio-contenedor-parrafo {
+                text-align: center;
             }
 
-            .Inicio-form{
+            .Inicio-form {
                 width: 80%;
                 background-color: #ffffff;
-                margin-top: 30px;
-                margin-left: 30px;
+                margin: 15px;
 
-                .form{
+                .form {
                     background-color: #ffffff;
                 }
 
-                .entrada{
-                    margin-top: 5px;
-                    width: 90%;
+                .entrada {
+                    /* margin-top: 5px; */
+                    width: 35vw;
                     height: 35px;
                     background-color: #d9d9d9;
                     border-radius: 5px;
@@ -128,28 +124,121 @@
                 }
 
             }
-            
-            .Inicio-form-boton{
-                width: 80%;
-                background-color: #ffffff;
-                margin-top: 30px;
-                
+
+            .Inicio-form-boton {
+                width: 100%;
                 display: flex;
                 justify-content: center;
-                .Inicio-iniciar{
-    
+
+                .Inicio-iniciar {
                     border: none;
-                    background-color: #7e01f5;
+                    background-color: #0033cc;
                     border-radius: 5px;
-                    padding: 10px;
-                    font-size: 15px;
+                    /* padding: 10px; */
+                    font-size: 20px;
                     margin-top: 25px;
-                    width: 300px;
-                    height: 35px;
+                    width: 50%;
+                    height: 50px;
                     color: #ffffff;
-    
+                    cursor: pointer;
                 }
             }
+        }
+    }
+}
+
+@media screen and (max-width: 863px) {
+    #Inicio-contenedor {
+        #Inicio-Circulos {}
+
+        #Inicio-main {
+            width: 60vw;
+            height: 90vh;
+
+            #Inicio-contenedor_titulos {
+                h1 {
+                    margin: 10px;
+                }
+
+                #Inicio-contenedor-parrafo {}
+
+                .Inicio-form {
+                    width: 55vw;
+
+                    .form {
+                        width: 60%;
+                    }
+
+                    .entrada {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 570px) {
+    #Inicio-Circulos {
+        display: flex;
+
+        #Inicio-Circulos_Amarrillo {
+            display: none;
+        }
+
+        #Inicio-Circulos_Amarrillo-2 {
+            display: none;
+        }
+
+        #Inicio-Circulos_Amarrillo-3 {
+            display: none;
+        }
+
+        #Inicio-Circulos_Azul {
+            display: none;
+        }
+
+        #Inicio-Circulos_Azul-2 {
+            display: none;
+        }
+
+        #Inicio-Circulos_Azul-3 {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 467px) {
+    #Inicio-contenedor {
+        width: 100vw;
+        height: 100vh;
+        #Inicio-Circulos {}
+
+        #Inicio-main {
+            width: 100%;
+            height: 100%;
+            border-radius: 0px;
+            
+            #Inicio-contenedor_titulos {
+                h1 {
+                    margin: 10px;
+                }
+
+                #Inicio-contenedor-parrafo {}
+
+                .Inicio-form {
+                    width: 90vw;
+
+                    .form {
+                        width: 60%;
+                    }
+
+                    .entrada {
+                        width: 100%;
+                    }
+                }
+            }
+            
         }
     }
 }
