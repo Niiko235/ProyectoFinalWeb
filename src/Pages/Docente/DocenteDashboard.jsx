@@ -36,7 +36,7 @@ const DocenteDashboard = () => {
 
   return (
     <>
-      <Admin basename="/docente" dataProvider={dataProvider} dashboard={Dashboard} >
+      <Admin basename="/docente" dataProvider={dataProvider} dashboard={Dashboard} defaultTheme='dark'>
         <Resource
         name="projects"
         list={docenteProyectosList}

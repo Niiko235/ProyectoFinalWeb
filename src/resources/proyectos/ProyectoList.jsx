@@ -5,7 +5,7 @@ const ProyectoList = () => (
     <Datagrid rowClick="edit">
       <TextField source="titulo" />
       <TextField source="area" />
-      <ReferenceField source="docenteId" reference="usuarios" />
+      <ReferenceField source="docenteId" reference="docentes" />
       <TextField source="estado" />
       <EditButton />
     </Datagrid>
