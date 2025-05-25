@@ -1,13 +1,16 @@
 import { useAuth } from '../../Context/authContext';
 import { useNavigate } from 'react-router-dom';
 import Tema from '../../resources/Tema/Tema';
-import { Admin, Resource, CustomRoutes} from "react-admin";
+import { Admin, Resource, CustomRoutes } from "react-admin";
 import dataProvider from '../../dataProvider';
 import Imagen from '../../img/imagen.jpg'
 import CardProyect from '../../Components/CardProyec/CardProyec';
 import { useState, useEffect } from 'react';
 import Popa from '../../Components/Popa/Popa';
 import { Route } from 'react-router-dom';
+import HistorialEstado from '../../Components/HistorialEstado/HistorialEstado'
+
+
 
 const EstudianteDashboard = () => {
   const { user, rol, logout } = useAuth();
@@ -30,14 +33,14 @@ const EstudianteDashboard = () => {
         est => est.correo.toLowerCase() === user.email.toLowerCase()
       );
 
-      console.log(estudiante);      
+      console.log(estudiante);
       if (!estudiante) return;
 
       const { data: proyectosEstudiante } = await dataProvider.getList("proyectos", {
         filter: { loggedUserId: estudiante.id }
       });
       console.log(proyectosEstudiante);
-      
+
       setProyectos(proyectosEstudiante);
     };
 
@@ -59,7 +62,19 @@ const EstudianteDashboard = () => {
   return (
     <Admin basename="/estudiante" dashboard={Dashboard} theme={Tema}>
       <CustomRoutes>
-        <Route path="/compartir/:id" element={<Popa key={proyectos.id} proyectos={proyectos}/>} />
+        <Route path="/compartir/:id" element={<Popa key={proyectos.id} proyectos={proyectos} />} />
+        <Route
+          path="/historial/:id"
+          element={
+            <HistorialEstado
+              itemsDeEstado={[
+                { id: 1, nombre: 'Inicio', tipo: 'pendiente', descripcion: 'Proyecto creado' },
+                { id: 2, nombre: 'En curso', tipo: 'avanzando' },
+                { id: 3, nombre: 'Finalizado', tipo: 'completado', descripcion: 'Proyecto finalizado' }
+              ]}
+            />
+          }
+        />
       </CustomRoutes>
       <Resource name="proyectos" />
     </Admin>

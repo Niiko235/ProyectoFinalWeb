@@ -4,9 +4,11 @@ import ModalBoton from '../Modal/Modal';
 import DetalleAvance from '../DetalleAvance/DetalleAvance'
 import './Popa.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Popa = ({ proyectos }) => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [avanceSeleccionado, setAvanceSeleccionado] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -22,6 +24,10 @@ const Popa = ({ proyectos }) => {
     const cerrarModal = () => {
         setModalOpen(false);
         setAvanceSeleccionado(null);
+    };
+
+    const irAHistorial = () => {
+        navigate(`/estudiante/historial/${id}`);
     };
 
     return (
@@ -69,7 +75,13 @@ const Popa = ({ proyectos }) => {
                         </tbody>
                     </table>
                 </div>
+                <div style={{ marginTop: '1rem' }}>
+                <button className="Popa-boton-historial" onClick={irAHistorial}>
+                    Ver Historial de Estados
+                </button>
             </div>
+            </div>
+
 
             <DetalleAvance
                 open={modalOpen}

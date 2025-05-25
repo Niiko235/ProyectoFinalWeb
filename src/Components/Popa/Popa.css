@@ -52,3 +52,19 @@
         color: #333;
     }
 }
+
+.Popa-boton-historial {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Popa-boton-historial:hover {
+  background-color: #388e3c;
+}
