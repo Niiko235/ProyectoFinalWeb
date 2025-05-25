@@ -1,128 +1,196 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
 
-#home-Circulos{
-    display: flex;
-}
+.home-principal {
+    background-color: #0894DD;
+    width: 100vw;
+    height: 100vh;
 
-#home-Circulos_Amarrillo{
-    width: 100px;
-    height: 100px;
-    background-color: #f5f43c;
-    border-radius: 50%;
-    
-    position: absolute;
-    left: 500px;
-    top: 500px;
-    z-index: 2;
-
-}
-
-#home-Circulos_Azul{
-    width: 200px;
-    height: 200px;
-    background-color: #3985f4;
-    border-radius: 50%;
-    
-    position: absolute;
-    left: 150px;
-    top: 10px;
-    z-index: 1;
-}
-
-#home-Circulos_Amarrillo-2{
-    width: 200px;
-    height: 200px;
-    background-color: #f5f43c;
-    border-radius: 50%;
-    
-    position: absolute;
-    left: 1100px;
-    top: 150px;
-}
-
-#main-home{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 150px;
-}
-
-#home-titulo{
-    position: relative;
-    color: black;
-    p{
+    #home-Circulos {
         display: flex;
-        justify-content: center;
-        margin-top: 10px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 0;
     }
-}
 
-#home-opciones{
-    display: flex;
-    gap: 40px;
-    position: relative;
-    margin-top: 20px;
+    #home-Circulos_Amarrillo {
+        width: 100px;
+        height: 100px;
+        background-color: #f7ff00;
+        border-radius: 50%;
+        position: absolute;
+        left: 65%;
+        top: 80%;
+        z-index: 2;
 
-    .cartas{
-        width: 300px;
-        height: 200px;
-        margin-top: 5px;
-        background-color: #ffffff;
-        border-radius: 20px;
+    }
+
+    #home-Circulos_Azul {
+        width: 150px;
+        height: 150px;
+        background-color: #4440f5;
+        border-radius: 50%;
+        position: absolute;
+        left: 15%;
+        top: 5%;
+        z-index: 1;
+    }
+
+    #home-Circulos_Amarrillo-2 {
+        width: 150px;
+        height: 150px;
+        background-color: #f7ff00;
+        border-radius: 50%;
+        position: absolute;
+        left: 80%;
+        top: 35%;
+    }
+
+    #main-home {
+        width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transform: scale(1);
-        transition: transform 0.3s ease-in-out;
-        
-        #cartas-login{
-            background-color: #ffffff;
-        }
+    }
 
-        #cartas-descripcion{
-            background-color: #ffffff;
+    #home-titulo {
+        position: relative;
+        color: #FFFFFF;
+        p {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+    }
+
+    #home-opciones {
+        display: flex;
+        gap: 40px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        .cartas {
+            width: 300px;
+            height: 200px;
+            margin-top: 5px;
+            background-color: #e6ecff;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            transform: scale(1);
+            transition: transform 0.3s ease-in-out;
 
-            h2{
-                background-color: #ffffff;
+            .cartas-icono{
+                font-size: 50px;
             }
 
-            p{
-                background-color: #ffffff;
+            #cartas-descripcion {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+
+
+            #cartas-boton {
+                margin-top: 10px;
+                width: 280px;
+                height: 45px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                background-color: #0033cc;
+                color: #ffffff;
+                font-size: larger;
+                border-radius: 10px;
+                text-decoration: none;
+            }
+
+            #cartas-boton:hover {
+                cursor: pointer;
             }
         }
 
 
+        .cartas:hover {
+            transform: scale(1.1);
+        }
 
-        #cartas-boton{
-            margin-top: 10px;
-            width: 280px;
-            height: 45px;
+
+    }
+}
+
+@media screen and (max-width: 735px) {
+
+    .home-principal{
+        height: 125vh;
+        #main-home {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            
-            background-color: #7e01f5;
-            color: #ffffff;
-            font-size: larger;
-            border-radius: 10px;
-            text-decoration: none;
+            justify-content: start;
+
+            #home-titulo {
+                width: 100vw;
+                height: 25vh; 
+                h1 {
+                    text-align: center;
+                    margin-top: 40px;
+                }
+                p{
+                    text-align: center;
+                }
+            }
+            #home-opciones {
+                margin-top: 40px;
+                .cartas {
+                    width: 250px;
+                    height: 200px;
+                    margin-top: 5px;
+                    #cartas-boton {
+                        margin-top: 10px;
+                        width: 200px;
+                        height: 45px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
         }
-        #cartas-boton:hover{
-            cursor: pointer;
-        } 
+
+        #home-Circulos_Amarrillo {
+            display: none;
+        }
+        #home-Circulos_Azul {
+            display: none;
+        }
+    
+        #home-Circulos_Amarrillo-2 {
+            display: none;
+        }
     }
+}
 
-
-    .cartas:hover{
-        transform: scale(1.1);
+@media screen and (max-width: 410px) {
+    .home-principal{
+        height: 125vh;
+        #main-home {
+            #home-titulo {
+                p{
+                    display: none;
+                }
+            } 
+            #home-opciones{
+                margin-top: 60;
+            }   
+        }
     }
-
-
 }

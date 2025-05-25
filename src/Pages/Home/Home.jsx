@@ -10,7 +10,7 @@ import LoginIcon from '@mui/icons-material/Login';
 const Home = () => {
     return (
         <>
-            
+        <div className='home-principal'>
                 <div id='home-Circulos'>
                     <div id='home-Circulos_Amarrillo' className='animate__animated  animate__bounceIn'></div>
                     <div id='home-Circulos_Azul' className='animate__animated  animate__bounceIn'></div>
@@ -24,7 +24,7 @@ const Home = () => {
                     <div id='home-opciones' className='animate__animated animate__zoomIn'>
                         <div className='cartas'>
                             <div id='cartas-login'>
-                                {<LoginIcon sx={{background: '#ffffff', fontSize: 50}}/>}
+                                {<LoginIcon className='cartas-icono'/>}
                             </div>
                             <div id='cartas-descripcion'>
                                 <h2>Iniciar Sesión</h2>
@@ -36,7 +36,7 @@ const Home = () => {
                         </div>
                         <div className='cartas'>
                             <div id='cartas-login'>
-                                {<HowToRegIcon sx={{background: '#ffffff', fontSize: 50}}/>}
+                                {<HowToRegIcon sx={{ fontSize: 50}}/>}
                             </div>
                             <div id='cartas-descripcion'>
                                 <h2>Registrarse</h2>
@@ -52,6 +52,8 @@ const Home = () => {
                     <div id='Footer-Circulos-amarillo'></div>
                     <div id='Footer-Circulos-azul'></div>
                 </div>
+        </div>
+            
             
         </>
     )
