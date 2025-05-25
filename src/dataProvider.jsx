@@ -12,7 +12,16 @@ const data = {
       institucion: "I.E. Central",
       docenteId: 3,
       observaciones: "Primera etapa completada",
-      estado: "Activo"
+      estado: "Activo",
+      team: [{
+        id: 1,
+        nombre: "Juan",
+        apellido: "Pérez",
+      }, {
+        id: 2,
+        nombre: "Ana",
+        apellido: "García",
+      }]
     },
     {
       id: 2,
@@ -24,7 +33,12 @@ const data = {
       institucion: "I.E. Moderna",
       docenteId: 4,
       observaciones: "A la espera de aprobación",
-      estado: "Formulación"
+      estado: "Formulación",
+      team: [{
+        id: 2,
+        nombre: "AnA",
+        apellido: "Pérez",
+      }]
     }
   ],
   usuarios: [
@@ -136,9 +150,19 @@ const dataProvider = {
           items = items.filter(p => p.estado === filter.estado);
         }
 
-        if (filter.docenteId) {
-          items = items.filter(p => p.docenteId === Number(filter.docenteId));
+        if (filter.teamId) {
+          items = items.filter(p =>
+            p.team.some(miembro => miembro.id === Number(filter.teamId))
+          );
         }
+
+        // if (filter.docenteId) {
+        //   if (filter.teamId) {
+        //     items = items.filter(p =>
+        //       p.team.some(miembro => miembro.id === Number(filter.teamId))
+        //     );
+        //   }
+        // }
       }
 
 
