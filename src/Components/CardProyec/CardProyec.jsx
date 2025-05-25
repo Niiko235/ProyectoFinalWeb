@@ -6,13 +6,12 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
-
+import { Link } from 'react-router-dom';
 
 const CardProyect =({proyecto})=> {
   console.log(proyecto);
-  
   return (
-    <Card sx={{ width: 400, height: 300}}>
+    <Card sx={{ width: 400, height: 250}}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -21,8 +20,10 @@ const CardProyect =({proyecto})=> {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
+
+        <Button size="small" color="primary" >
+          <Link to={`/estudiante/compartir/${proyecto.id}`}> share
+          </Link>
         </Button>
       </CardActions>
     </Card>

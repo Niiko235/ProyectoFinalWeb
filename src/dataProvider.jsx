@@ -21,7 +21,19 @@ const data = {
         id: 2,
         nombre: "Ana",
         apellido: "García",
-      }]
+      }],
+      avances:[
+        {
+          nombre: "Avance 1",
+          descr: "Fecha",
+          fecha: "2024-01-01",
+        },
+        {
+          nombre: "Avance 2",
+          descr: "Fecha",
+          fecha: "2024-01-15",
+          },
+      ]
     },
     {
       id: 2,
@@ -38,7 +50,24 @@ const data = {
         id: 2,
         nombre: "AnA",
         apellido: "Pérez",
-      }]
+      }],
+      avances:[
+        {
+          nombre: "Avance 1",
+          descr: "Fecha",
+          fecha: "2024-01-01",
+        },
+        {
+          nombre: "Avance 2",
+          descr: "Fecha",
+          fecha: "2024-01-15",
+          },
+          {
+          nombre: "Avance 3",
+          descr: "Fecha",
+          fecha: "2024-01-15",
+          }
+      ]
     }
   ],
   usuarios: [

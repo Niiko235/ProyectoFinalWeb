@@ -1,0 +1,54 @@
+.Popa-principal {
+    width: 80vw;
+    height: 100vh;
+    background-color: #FFFFFF;
+
+    .Popa-principal-titulo {
+        margin: 20px;
+    }
+
+    .Popa-descripcion {
+        display: flex;
+        margin: 20px;
+        justify-content: space-evenly;
+
+        .Popa-boton{
+            margin: 10px;
+        }
+    }
+
+    .Popa-tabla-container {
+        margin: 1rem;
+        overflow-x: auto;
+    }
+
+    .Popa-tabla {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .Popa-tabla thead {
+        background-color: #ffeb3b;
+    }
+
+    .Popa-tabla th,
+    .Popa-tabla td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .Popa-tabla tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .Popa-tabla th {
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #333;
+    }
+}

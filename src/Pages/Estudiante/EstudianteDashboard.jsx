@@ -1,11 +1,13 @@
 import { useAuth } from '../../Context/authContext';
 import { useNavigate } from 'react-router-dom';
 import Tema from '../../resources/Tema/Tema';
-import { Admin, Resource } from "react-admin";
+import { Admin, Resource, CustomRoutes} from "react-admin";
 import dataProvider from '../../dataProvider';
 import Imagen from '../../img/imagen.jpg'
 import CardProyect from '../../Components/CardProyec/CardProyec';
 import { useState, useEffect } from 'react';
+import Popa from '../../Components/Popa/Popa';
+import { Route } from 'react-router-dom';
 
 const EstudianteDashboard = () => {
   const { user, rol, logout } = useAuth();
@@ -41,10 +43,6 @@ const EstudianteDashboard = () => {
 
     fetchData();
   }, [user]);
-
-
-
-
   const Dashboard = () => (
     <div className='Dashdoce-principal'>
       <h1>Hola, {user.email} {rol}</h1>
@@ -60,8 +58,10 @@ const EstudianteDashboard = () => {
 
   return (
     <Admin basename="/estudiante" dashboard={Dashboard} theme={Tema}>
-      <Resource name="proyectos">
-      </Resource>
+      <CustomRoutes>
+        <Route path="/compartir/:id" element={<Popa key={proyectos.id} proyectos={proyectos}/>} />
+      </CustomRoutes>
+      <Resource name="proyectos" />
     </Admin>
   );
 };
