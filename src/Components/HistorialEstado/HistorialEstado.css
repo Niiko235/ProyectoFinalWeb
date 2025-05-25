@@ -1,0 +1,74 @@
+.contenedor-historial-estados {
+  /* background-color: #c6f6d5; Fondo verde claro */
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 100%; /* Ajustar según sea necesario */
+  margin: 20px auto; /* Para centrar, ajustar según sea necesario */
+  /* border: 2px solid #2c3e50; Borde oscuro similar al mockup */
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); Opcional: añade una sombra sutil */
+}
+
+.titulo-historial-estados {
+  font-size: 1.8em;
+  color: #2c3e50; /* Color de texto gris oscuro/azulado */
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.item-estado {
+  display: flex;
+  align-items: flex-start; /* Alinea los items arriba */
+  margin-bottom: 20px;
+}
+
+.indicador-estado {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 15px;
+  margin-top: 5px; /* Ajustar para mejor alineación vertical con el texto */
+  border: 3px solid #2c3e50; /* Borde oscuro para el círculo */
+  flex-shrink: 0; /* Evita que el círculo se encoja */
+}
+
+/* Colores del Indicador - asegúrate que coincidan con la propiedad 'tipo' en tus datos */
+.indicador-estado.completado {
+  background-color: #3b82f6; /* Azul */
+}
+
+.indicador-estado.avanzando {
+  background-color: #8b5cf6; /* Morado */
+}
+
+.indicador-estado.pendiente {
+  background-color: #f59e0b; /* Ámbar/Amarillo - ejemplo */
+}
+
+.indicador-estado.error {
+  background-color: #ef4444; /* Rojo - ejemplo */
+}
+
+.indicador-estado.defecto {
+  background-color: #6b7280; /* Gris - por defecto */
+}
+
+.detalles-estado {
+  display: flex;
+  flex-direction: column;
+}
+
+.nombre-estado {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.descripcion-estado {
+  font-size: 0.95em;
+  color: #374151; /* Gris ligeramente más claro para la descripción */
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.4;
+}
