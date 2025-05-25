@@ -7,6 +7,40 @@ import { useNavigate, useLocation } from 'react-router-dom';
 export const authContext = createContext();
 
 
+export const createUserAsCoordinator = async (email, password, userData) => {
+    try {
+        // 1. Guardar las credenciales del coordinador actual ANTES de crear el nuevo usuario
+        const coordinatorUid = auth.currentUser.uid;
+        const docref = doc(db, "users", coordinatorUid);
+        const docSnap = await getDoc(docref);
+
+        if (!docSnap.exists()) {
+            throw new Error("No se encontró el documento de usuario coordinador -- METODO CREATEUSERASCOORDINATOR");
+        }
+
+        const coordinatorEmail = docSnap.data().email;
+        const coordinatorPassword = docSnap.data().password;
+
+        // 2. Crear el nuevo usuario
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const newUserId = userCredential.user.uid;
+
+        // 3. Guardar datos adicionales en Firestore con UID nuevo
+        await setDoc(doc(db, "users", newUserId), {
+            ...userData,
+        });
+
+        // 4. Reautenticar al coordinador para mantener su sesión
+        await signInWithEmailAndPassword(auth, coordinatorEmail, coordinatorPassword);
+
+        return newUserId;
+    } catch (error) {
+        console.error("Error al crear usuario:", error);
+        throw error;
+    }
+};
+
+
 export const useAuth = () => {
     const context = useContext(authContext)
     if (!context) throw new Error('El context Auth-provider no esta funcionando bien')
@@ -32,19 +66,17 @@ export function AuthProvider({ children }) {
     // escucha si un usuario sigue logeado aunque recargue la pagina
     // cuando se inicia sesion cambia directamente las credenciales
     useEffect(() => {
-        const unsubonscribe = onAuthStateChanged(auth, async (currentUser) => {
-            setUser(currentUser);
-            // console.log('Usuario autenticado:', currentUser);
+    const unsubonscribe = onAuthStateChanged(auth, async (currentUser) => {
+        setUser(currentUser);
 
-            if (currentUser) {
-                const ref = doc(db, 'users', currentUser.uid);
-                const snap = await getDoc(ref);
+        if (currentUser) {
+            const ref = doc(db, 'users', currentUser.uid);
+            const snap = await getDoc(ref);
+
+            if (snap.exists()) {
                 const data = snap.data();
-                // console.log('Datos del usuario:', data.rol);
-                setRol(data?.rol || null);
-
-                // Redirección automática por rol
-                // console.log('location.pathname', location.pathname);
+                setRol(data.rol || null);
+                
                 if (data.rol && location.pathname === '/login') {
                     if (data.rol === "coordinador") navigate('/admin');
                     else if (data.rol === "profesor") navigate('/docente');
@@ -52,13 +84,17 @@ export function AuthProvider({ children }) {
                 }
             } else {
                 setRol(null);
+                // console.warn('No se encontró el documento de usuario');
             }
+        } else {
+            setRol(null);
+        }
 
-            setLoading(false);
-        });
+        setLoading(false);
+    });
 
-        return () => unsubonscribe();
-    }, []);
+    return () => unsubonscribe();
+}, []);
 
 
     //logearse
@@ -83,7 +119,7 @@ export function AuthProvider({ children }) {
     // }
 
 
-    const registrarUsers = (name, lastname, dni, phone, UID, rol, nickname) =>
+    const registrarUsers = (name, lastname, dni, phone, UID, rol, nickname, email, password) =>
         setDoc(doc(db, "users", UID), {
             dni: parseInt(dni),
             lastnames: lastname,
@@ -91,6 +127,8 @@ export function AuthProvider({ children }) {
             nickname: nickname,
             phone: parseInt(phone),
             rol: rol,
+            email: email,
+            password: password,
         });
 
 
@@ -100,7 +138,7 @@ export function AuthProvider({ children }) {
 
 
     return (
-        <authContext.Provider value={{ signup, login, user, logout, loading, registrarUsers, rol }}> {/*, loginWithGoogle, resetPassword*/}
+        <authContext.Provider value={{ signup, login, user, logout, loading, registrarUsers, rol, createUserAsCoordinator }}> {/*, loginWithGoogle, resetPassword*/}
             {children}
         </authContext.Provider>
     )

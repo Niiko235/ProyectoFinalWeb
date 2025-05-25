@@ -5,18 +5,18 @@ import { Create, SimpleForm, TextInput, DateInput, ReferenceInput,
 const docenteUsuarioEdit = () => (
   <Edit title="Editar Usuario">
     <SimpleForm>
-      <TextInput source="nombre" />
-      <TextInput source="apellido" />
-      <TextInput source="documento" validate={required()} />
-      <TextInput source="correo" validate={required()} />
-      <TextInput source="telefono" />
-      <TextInput source="usuario" validate={required()}/>
-      <TextInput source="contraseña" validate={required()}/>
+      <TextInput source="names" />
+      <TextInput source="lastnames" />
+      <TextInput source="dni" validate={required()} />
+      {/* <TextInput source="correo" validate={required()} /> */}
+      <TextInput source="phone" />
+      <TextInput source="nickname" validate={required()}/>
+      {/* <TextInput source="contraseña" validate={required()}/> */}
       <SelectInput
         source="rol"
         choices={[
-          { id: '1', name: 'Estudiante' },
-          { id: '2', name: 'Docente' },
+          { id: '1', name: 'estudiante' },
+          { id: '2', name: 'profesor' },
         ]}
         validate={required()}
       />

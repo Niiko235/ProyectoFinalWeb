@@ -3,11 +3,11 @@ import { List, Datagrid, TextField, EmailField, EditButton, DeleteButton } from 
 const docenteUsuarioList = () => (
   <List>
     <Datagrid>
-      <TextField source="nombre" />
-      <TextField source="apellido" />
-      <TextField source="documento" />
+      <TextField source="names" />
+      <TextField source="lastnames" />
+      <TextField source="dni" />
       <TextField source="rol" />
-      <EmailField source="correo" />
+      {/* <EmailField source="correo" /> */}
       <EditButton />
       <DeleteButton />
     </Datagrid>
