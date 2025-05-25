@@ -61,9 +61,6 @@ const EstudianteDashboard = () => {
   return (
     <Admin basename="/estudiante" dashboard={Dashboard} theme={Tema}>
       <Resource name="proyectos">
-        <div>
-          HOLA
-        </div>
       </Resource>
     </Admin>
   );

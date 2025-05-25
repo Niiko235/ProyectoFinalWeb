@@ -12,7 +12,7 @@ const CardProyect =({proyecto})=> {
   console.log(proyecto);
   
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 400, height: 300}}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
