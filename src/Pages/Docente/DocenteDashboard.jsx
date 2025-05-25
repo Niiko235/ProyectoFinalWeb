@@ -1,6 +1,12 @@
 import { useAuth } from '../../Context/authContext';
 import { useNavigate } from 'react-router-dom';
-import dataProvider from '../../dataProvider';
+
+
+
+import DataProviderDocente from './DataProviderDocente';
+
+
+
 import docenteProyectosList from '../../resources/docenteProyectos/docenteProyectosList';
 import docenteProyectosEdit from '../../resources/docenteProyectos/docenteProyectosEdit';
 import docenteProyectosCrear from '../../resources/docenteProyectos/docenteProyectosCrear';
@@ -25,17 +31,20 @@ const DocenteDashboard = () => {
     </div>
   </div>);
 
+
+  const dataProvider = DataProviderDocente(user);
+
   return (
     <>
       <Admin basename="/docente" dataProvider={dataProvider} dashboard={Dashboard} >
         <Resource
-        name="proyectos"
+        name="projects"
         list={docenteProyectosList}
         edit={docenteProyectosEdit}
         create={docenteProyectosCrear}
       />
-      <Resource name="usuarios" />
-      <Resource name="estudiantes" />
+      <Resource name="users" />
+      <Resource name="progresses" />
       </Admin>
     </>
   );

@@ -3,9 +3,9 @@ import { List, Datagrid, TextField, ReferenceField, EditButton } from 'react-adm
 const docenteProyectosList = () => (
   <List>
     <Datagrid rowClick="edit">
-      <TextField source="titulo" />
+      <TextField source="title" />
       <TextField source="area" />
-      <TextField source="estado" />
+      <TextField source="status" />
       <EditButton />
     </Datagrid>
   </List>

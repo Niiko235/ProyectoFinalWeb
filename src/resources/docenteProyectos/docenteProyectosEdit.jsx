@@ -7,19 +7,19 @@ const docenteProyectosEdit = () => (
         <SimpleForm>
             <TextInput disabled source="id" />
 
-            <TextInput source="titulo" validate={required()} />
+            <TextInput source="title" validate={required()} />
             <TextInput source="area" />
-            <TextInput multiline source="objetivos" />
-            <TextInput multiline source="cronograma" />
-            <TextInput source="presupuesto" />
-            <TextInput source="institucion" />
-            <ReferenceArrayInput
+            <TextInput multiline source="goals" />
+            {/* <TextInput multiline source="cronograma" /> */}
+            {/* <TextInput source="presupuesto" /> */}
+            <TextInput source="institution" />
+            {/* <ReferenceArrayInput
                 label="Estudiantes"
                 source="estudiantesIds"
                 reference="estudiantes"
             >
                 <SelectArrayInput optionText="nombre" />
-            </ReferenceArrayInput>
+            </ReferenceArrayInput> */}
         </SimpleForm>
     </Edit>
 );
