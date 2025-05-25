@@ -2,6 +2,7 @@ import { AdminContext, Admin, Resource, CustomRoutes } from 'react-admin';
 import { useAuth } from '../../Context/authContext';
 import dataProvider from '../../dataProvider';
 import { Route, useNavigate } from 'react-router-dom';
+import Tema from '../../resources/Tema/Tema';
 
 /* Rutas para el crud de proyectos*/
 import coordinadorProyectoList from '../../resources/coordinadorProyectos/coordinadorProyectoList/';
@@ -38,7 +39,7 @@ const AdminPanel = () => {
   </div>);
 
   return (
-    <Admin basename="/admin" dataProvider={dataProvider} dashboard={Dashboard}>
+    <Admin basename="/admin" dataProvider={dataProvider} dashboard={Dashboard} theme={Tema}>
       
       <Resource
         name="proyectos"

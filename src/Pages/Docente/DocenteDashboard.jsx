@@ -4,6 +4,7 @@ import dataProvider from '../../dataProvider';
 import docenteProyectosList from '../../resources/docenteProyectos/docenteProyectosList';
 import docenteProyectosEdit from '../../resources/docenteProyectos/docenteProyectosEdit';
 import docenteProyectosCrear from '../../resources/docenteProyectos/docenteProyectosCrear';
+import Tema from '../../resources/Tema/Tema';
 
 import { Admin, Resource} from "react-admin";
 import './DocenteDashboard.css'
@@ -27,7 +28,7 @@ const DocenteDashboard = () => {
 
   return (
     <>
-      <Admin basename="/docente" dataProvider={dataProvider} dashboard={Dashboard} defaultTheme='dark'>
+      <Admin basename="/docente" dataProvider={dataProvider} dashboard={Dashboard} theme={Tema}>
         <Resource
         name="proyectos"
         list={docenteProyectosList}
