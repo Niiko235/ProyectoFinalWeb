@@ -1,17 +1,21 @@
-import { AdminContext, Admin, Resource } from 'react-admin';
+import { AdminContext, Admin, Resource, CustomRoutes } from 'react-admin';
 import { useAuth } from '../../Context/authContext';
 import dataProvider from '../../dataProvider';
-import { useNavigate } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 
-import ProyectoList from '../../resources/proyectos/ProyectoList';
-import ProyectoEdit from '../../resources/proyectos/ProyectoEdit';
-import ProyectoCreate from '../../resources/proyectos/ProyectoCreate';
+/* Rutas para el crud de proyectos*/
+import coordinadorProyectoList from '../../resources/coordinadorProyectos/coordinadorProyectoList/';
+import coordinadorProyectoEdit from '../../resources/coordinadorProyectos/coordinadorProyectoEdit/';
+import coordinadorProyectoCreate from '../../resources/coordinadorProyectos/coordinadorProyectoCreate/';
+import CoordinadorProyectoVista from '../../resources/coordinadorProyectos/coordinadorProyectoVista';
 
+/* Rutas para el crud de usuarios*/
 import docenteUsuarioList from '../../resources/docenteUsuario/docenteUsuarioList';
 import docenteUsuarioCreate from '../../resources/docenteUsuario/docenteUsuarioCreate';
 import docenteUsuarioEdit from '../../resources/docenteUsuario/docenteUsuarioEdit';
 
 import './AdminPanel.css'
+
 
 const AdminPanel = () => {
   const { rol, loading, logout} = useAuth();
@@ -38,9 +42,9 @@ const AdminPanel = () => {
       
       <Resource
         name="proyectos"
-        list={ProyectoList}
-        edit={ProyectoEdit}
-        create={ProyectoCreate}
+        list={coordinadorProyectoList}
+        edit={coordinadorProyectoEdit}
+        create={coordinadorProyectoCreate}
       />
       <Resource 
         name="usuarios"
@@ -48,6 +52,11 @@ const AdminPanel = () => {
         edit={docenteUsuarioEdit}
         create={docenteUsuarioCreate}
       />  
+
+      {/* Ruta personalizada */}
+      <CustomRoutes>
+        <Route path="/proyectos/:id/vista" element={<CoordinadorProyectoVista />} />
+      </CustomRoutes>
     </Admin>
   );
 };

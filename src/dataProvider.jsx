@@ -28,79 +28,127 @@ const data = {
     }
   ],
   usuarios: [
-  {id:1, nombre: "Cristian",
-    apellido: "Aristizabal",
-    documento: 1006511397,
-    correo: "cristianalejo2407@gmail.com",
-    telefono: 3143924897,
-    usuario: "cristian",
-    contraseña: "1234",
-    rol: "Estudiante"},
-  {id:2, nombre: "Carlos",
-    apellido: "Pérez",
-    documento: 1025487632,
-    correo: "carlos@edu.com",
-    telefono: 3114456789,
-    usuario: "cperez",
-    contraseña: "docente123",
-    rol: "Estudiante"},
-  {id:3, nombre: "Laura",
-    apellido: "Gómez",
-    documento: 1002233445,
-    correo: "laura@edu.com",
-    telefono: 3123345566,
-    usuario: "lgomez",
-    contraseña: "laura2024",
-    rol: "Docente"},
-  {id:4, nombre: "Diana",
-    apellido: "Rodríguez",
-    documento: 1098765432,
-    correo: "diana@edu.com",
-    telefono: 3137788990,
-    usuario: "drodriguez",
-    contraseña: "coord456",
-    rol: "Docente"},
-  {id:5, nombre: "José",
-    apellido: "Martínez",
-    documento: 1054321876,
-    correo: "jose@edu.com",
-    telefono: 3109988776,
-    usuario: "jmartinez",
-    contraseña: "est123",
-    rol: "Estudiante"
-  },
-  {id:6, nombre: "Ana",
-    apellido: "Ruiz",
-    documento: 1045678901,
-    correo: "ana@edu.com",
-    telefono: 3176655443,
-    usuario: "aruiz",
-    contraseña: "ana456",
-    rol: "Estudiante"}
-]
+    {
+      id: 1, nombre: "Cristian",
+      apellido: "Aristizabal",
+      documento: 1006511397,
+      correo: "cristianalejo2407@gmail.com",
+      telefono: 3143924897,
+      usuario: "cristian",
+      contraseña: "1234",
+      rol: "Estudiante"
+    },
+    {
+      id: 2, nombre: "Carlos",
+      apellido: "Pérez",
+      documento: 1025487632,
+      correo: "carlos@edu.com",
+      telefono: 3114456789,
+      usuario: "cperez",
+      contraseña: "docente123",
+      rol: "Estudiante"
+    },
+    {
+      id: 3, nombre: "Laura",
+      apellido: "Gómez",
+      documento: 1002233445,
+      correo: "laura@edu.com",
+      telefono: 3123345566,
+      usuario: "lgomez",
+      contraseña: "laura2024",
+      rol: "Docente"
+    },
+    {
+      id: 4, nombre: "Diana",
+      apellido: "Rodríguez",
+      documento: 1098765432,
+      correo: "diana@edu.com",
+      telefono: 3137788990,
+      usuario: "drodriguez",
+      contraseña: "coord456",
+      rol: "Docente"
+    },
+    {
+      id: 5, nombre: "José",
+      apellido: "Martínez",
+      documento: 1054321876,
+      correo: "jose@edu.com",
+      telefono: 3109988776,
+      usuario: "jmartinez",
+      contraseña: "est123",
+      rol: "Estudiante"
+    },
+    {
+      id: 6, nombre: "Ana",
+      apellido: "Ruiz",
+      documento: 1045678901,
+      correo: "ana@edu.com",
+      telefono: 3176655443,
+      usuario: "aruiz",
+      contraseña: "ana456",
+      rol: "Estudiante"
+    }
+  ]
 };
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const dataProvider = {
-  
-  getList: async (resource) => {
+
+  getList: async (resource, params) => {
     await delay(300);
 
+    // Filtrar estudiantes
     if (resource === "estudiantes") {
       const estudiantes = data.usuarios.filter(u => u.rol === "estudiante");
       return { data: estudiantes, total: estudiantes.length };
     }
 
+    // Filtrar docentes
     if (resource === "docentes") {
       const docentes = data.usuarios.filter(u => u.rol === "docente");
       return { data: docentes, total: docentes.length };
     }
 
+    // Si es un recurso general
     if (data[resource]) {
-      return { data: data[resource], total: data[resource].length };
+      let items = data[resource];
+      const filter = params?.filter || {};
+
+      // Aplicar filtros personalizados
+      if (resource === "proyectos") {
+        if (filter.titulo) {
+          const keywords = filter.titulo.toLowerCase().split(' ');
+
+          items = items.filter(p => {
+            const texto = `${p.titulo} ${p.objetivos} ${p.area} ${p.institucion}`.toLowerCase();
+            return keywords.every(kw => texto.includes(kw));
+          });
+        }
+
+        if (filter.institucion) {
+          items = items.filter(p =>
+            p.institucion.toLowerCase().includes(filter.institucion.toLowerCase())
+          );
+        }
+
+        if (filter.estado) {
+          items = items.filter(p => p.estado === filter.estado);
+        }
+
+        if (filter.docenteId) {
+          items = items.filter(p => p.docenteId === Number(filter.docenteId));
+        }
+      }
+
+
+      return { data: items, total: items.length };
     }
+
+    // Recurso no reconocido
+    return { data: [], total: 0 };
   },
+
 
   getOne: async (resource, { id }) => {
     await delay(200);
