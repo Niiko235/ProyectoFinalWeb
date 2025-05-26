@@ -177,6 +177,7 @@ Ruta	        Componente	        Roles Permitidos	Propósito
 <p align="center">
     :house:Home:house:
 </p>
+
 ![Pagina Publica](https://github.com/user-attachments/assets/e46e532c-a032-41e9-8890-80b184b12f55)
 
 Este documento cubre las páginas de acceso público en la aplicación ProyectoFinalWeb que están disponibles para usuarios no autenticados. Estas páginas gestionan la experiencia inicial del usuario, la creación de cuentas y el punto de entrada de autenticación.
@@ -184,11 +185,13 @@ Las páginas públicas constan de tres componentes principales: la página de in
 <p align="center">
     :unlock:Login:unlock:
 </p>
+
 ![Captura de pantalla 2025-05-25 215206](https://github.com/user-attachments/assets/db8ef69c-46e5-4cf3-b805-b61bf06d94bb)
 
 <p align="center">
     :lock:Registre:lock:
 </p>
+
 ![Captura de pantalla 2025-05-25 215503](https://github.com/user-attachments/assets/adf1c61c-aebf-4e2e-9b63-c82a897999d4)
 
 ### Descripción General de las Páginas Públicas
