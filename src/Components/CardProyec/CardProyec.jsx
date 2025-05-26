@@ -15,7 +15,7 @@ const CardProyect =({proyecto})=> {
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {proyecto.titulo}
+            {proyecto.title}
           </Typography>
         </CardContent>
       </CardActionArea>

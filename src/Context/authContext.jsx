@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { sendPasswordResetEmail, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth, db } from '../Firebase/firabase'
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const authContext = createContext();
@@ -137,8 +137,44 @@ export function AuthProvider({ children }) {
     const logout = () => signOut(auth);
 
 
+    const getProyectosMios = async () => {
+        const ref = collection(db, 'projects'); 
+        const snap = await getDocs(ref);               
+
+        const proyectosDelUsuario = snap.docs
+            .filter(doc => {
+                const data = doc.data();
+                return Array.isArray(data.team) && data.team.includes(user.uid);
+            })
+            .map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+
+
+        console.log('proyectosDelUsuario', proyectosDelUsuario);
+        return proyectosDelUsuario;
+    };
+
+
+    const getAvances = async (proyecto) => {
+        const ref = collection(db, 'progresses');
+        const snap = await getDocs(ref);
+
+        const avancesDelProyecto = snap.docs
+            .filter(doc => {
+                // const data = doc.data();
+                 return Array.isArray(proyecto.progress) && proyecto.progress.includes(doc.id);
+            })
+            .map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+        return avancesDelProyecto; 
+    };
+
     return (
-        <authContext.Provider value={{ signup, login, user, logout, loading, registrarUsers, rol, createUserAsCoordinator }}> {/*, loginWithGoogle, resetPassword*/}
+        <authContext.Provider value={{ signup, login, user, logout, loading, registrarUsers, rol, createUserAsCoordinator, getProyectosMios }}> {/*, loginWithGoogle, resetPassword*/}
             {children}
         </authContext.Provider>
     )

@@ -13,39 +13,27 @@ import HistorialEstado from '../../Components/HistorialEstado/HistorialEstado'
 
 
 const EstudianteDashboard = () => {
-  const { user, rol, logout } = useAuth();
+  const { user, rol, logout, getProyectosMios } = useAuth();
   const navigate = useNavigate();
 
   const [proyectos, setProyectos] = useState([]);
 
   const handleLogout = async () => {
     await logout();
-    navigate('/login');
   };
 
   useEffect(() => {
-    if (!user) return;
-
-    const fetchData = async () => {
-      const { data: estudiantes } = await dataProvider.getList("estudiantes");
-
-      const estudiante = estudiantes.find(
-        est => est.correo.toLowerCase() === user.email.toLowerCase()
-      );
-
-      console.log(estudiante);
-      if (!estudiante) return;
-
-      const { data: proyectosEstudiante } = await dataProvider.getList("proyectos", {
-        filter: { loggedUserId: estudiante.id }
-      });
-      console.log(proyectosEstudiante);
-
-      setProyectos(proyectosEstudiante);
+    const fetchProyectos = async () => {
+      const res = await getProyectosMios();
+      setProyectos(res);
     };
+    if (user) fetchProyectos();
 
-    fetchData();
-  }, [user]);
+    console.log(proyectos);
+    
+  }, []);
+
+
   const Dashboard = () => (
     <div className='Dashdoce-principal'>
       <h1>Hola, {user.email} {rol}</h1>

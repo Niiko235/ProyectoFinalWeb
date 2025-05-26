@@ -4,7 +4,7 @@ import ModalBoton from '../Modal/Modal';
 import DetalleAvance from '../DetalleAvance/DetalleAvance';
 import HistorialModal from '../HistoriaModal/HistorialModal';
 import './Popa.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Popa = ({ proyectos }) => {
@@ -16,6 +16,24 @@ const Popa = ({ proyectos }) => {
 
 
     const proyecto = proyectos.find((p) => p.id.toString() === id);
+
+    const [avances, setAvances] = useState([]);
+
+    useEffect(() => {
+        const fetchAvances = async () => {
+            const res = await getAvances(proyecto);
+            setAvances(res);
+        };
+
+
+        
+        
+        if (proyecto) fetchAvances();
+
+        // console.log(avances)
+
+    }, []);
+
 
     if (!proyecto) return <p>Proyecto no encontrado</p>;
 
@@ -33,22 +51,29 @@ const Popa = ({ proyectos }) => {
     const cerrarHistorial = () => setHistorialOpen(false);
 
 
+
+    const desc = proyecto.observacionesPrevias.push(proyecto.descripcion);
+    const stats = proyecto.estadosPrevios.push(proyecto.status);
+
+
+    console.log('Descripción:', desc);
+    console.log('Estados:', stats);
     return (
         <>
             <div className='Popa-principal'>
                 <div className='Popa-principal-titulo'>
                     <h1>
-                        {proyecto.titulo}
+                        {proyecto.title}
                     </h1>
                 </div>
                 <div className='Popa-descripcion'>
                     <p>
-                        {proyecto.objetivos}
+                        {proyecto.goals}
                     </p>
                 </div>
                 <div className='Popa-descripcion'>
                     <h2>
-                        Avances
+                        AGREGAR EL ATRIBUTO DESCRIPCION
                     </h2>
                     <ModalBoton className='Popa-boton' />
                 </div>
@@ -97,7 +122,8 @@ const Popa = ({ proyectos }) => {
             <HistorialModal
                 open={historialOpen}
                 onClose={cerrarHistorial}
-                itemsDeEstado={proyecto.avances} // Aquí pasas los datos que el modal necesita
+                itemsDeEstado={stats} // Aquí pasas los datos que el modal necesita
+                descripcionDeEstado={desc} // Aquí pasas la descripción del proyecto
             />
         </>
     );

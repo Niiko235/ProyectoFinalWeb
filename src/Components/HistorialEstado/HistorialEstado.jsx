@@ -17,7 +17,7 @@ const obtenerClaseIndicador = (tipoEstado) => {
   }
 };
 
-const HistorialEstado = ({ itemsDeEstado }) => {
+const HistorialEstado = ({ itemsDeEstado, descripcionDeEstado }) => {
   if (!itemsDeEstado || itemsDeEstado.length === 0) {
     return (
       <div className="contenedor-historial-estados">
@@ -30,15 +30,15 @@ const HistorialEstado = ({ itemsDeEstado }) => {
   return (
     <div className="contenedor-historial-estados">
       <h2 className="titulo-historial-estados">Historial de estado</h2>
-      {itemsDeEstado.map((item, index) => (
-        <div className="item-estado" key={item.id || index}> {/* Es mejor usar un id único si está disponible */}
+      {itemsDeEstado.map((estado, i) => (
+        <div className="item-estado" key={i}> {/* Es mejor usar un id único si está disponible */}
           <div
-            className={`indicador-estado ${obtenerClaseIndicador(item.tipo)}`}
+            className={`indicador-estado ${obtenerClaseIndicador(estado)}`}
           ></div>
           <div className="detalles-estado">
-            <p className="nombre-estado">{item.nombre}</p>
-            {item.descripcion && (
-              <p className="descripcion-estado">{item.descripcion}</p>
+            <p className="nombre-estado">{`Estado #: ${i + 1}`}</p>
+            {descripcionDeEstado[i] && (
+              <p className="descripcion-estado">{descripcionDeEstado[i]}</p>
             )}
           </div>
         </div>

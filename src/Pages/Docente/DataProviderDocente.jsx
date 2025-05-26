@@ -212,7 +212,12 @@ const DataProviderDocente = (user) => ({
 
     const docRef = await addDoc(collection(db, resource), {
       ...data,
-      leader: user.uid, // Asignar el ID del docente como líder
+      leader: user.uid,
+      status: 'Formulacion',
+      observaciones: 'Inicio del proyecto',
+      progress: [],
+      observacionesPrevias: [],
+      estadosPrevios: [],// Asignar el ID del docente como líder
     });
     return { data: { id: docRef.id, ...data, leader: user.uid } };
   }
