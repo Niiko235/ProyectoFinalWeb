@@ -8,6 +8,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/authContext';
 
+
+// Librerías utilizadas para la importación a pdf
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 const Popa = ({ proyectos }) => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -44,7 +49,7 @@ const Popa = ({ proyectos }) => {
                 ...(proyecto.status ? [proyecto.status] : [])
             ]);
         }
-}, [proyecto]);
+    }, [proyecto]);
 
 
     if (!proyecto) return <p>Proyecto no encontrado</p>;
@@ -65,9 +70,29 @@ const Popa = ({ proyectos }) => {
 
     // console.log('Descripción:', getDescripcion);
     // console.log('Estados:', getEstados);
+
+
+    /* Exportación a pdf */
+    const exportarPDF = async () => {
+        const elemento = document.getElementById('Popa-principal-#');
+
+        if (!elemento) return alert("No se encontró el contenido del proyecto");
+
+        const canvas = await html2canvas(elemento, { scale: 2 });
+        const imgData = canvas.toDataURL('image/png');
+
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save(`proyecto_${proyecto.id}.pdf`);
+    };
+
     return (
         <>
-            <div className='Popa-principal'>
+            <div id='Popa-principal-#' className='Popa-principal'>
                 <div className='Popa-principal-titulo'>
                     <h1>
                         {proyecto.title}
@@ -82,7 +107,7 @@ const Popa = ({ proyectos }) => {
                     <h2>
                         AGREGAR EL ATRIBUTO DESCRIPCION
                     </h2>
-                    <ModalBoton className='Popa-boton' idProyecto = {id} />
+                    <ModalBoton className='Popa-boton' idProyecto={id} />
                 </div>
                 <div className='Popa-tabla-container'>
                     <table className='Popa-tabla'>
@@ -95,9 +120,9 @@ const Popa = ({ proyectos }) => {
                         </thead>
                         <tbody>
                             {avances && avances.length > 0 ? (
-                               avances.map((avance, index) => (
+                                avances.map((avance, index) => (
                                     <tr key={index} onClick={() => handleFilaClick(avance)} style={{ cursor: 'pointer' }}>
-                                        <td>{(index+1)}</td>
+                                        <td>{(index + 1)}</td>
                                         <td>{avance.fecha}</td>
                                         <td>{avance.descripcion}</td>
                                     </tr>
@@ -114,6 +139,9 @@ const Popa = ({ proyectos }) => {
                     {/* Botón para abrir el modal de historial */}
                     <button className='Popa-boton-historial' onClick={abrirHistorial}>
                         Ver Historial de Estados (Modal)
+                    </button>
+                    <button onClick={exportarPDF} className="boton-exportar">
+                        📄 Exportar a PDF
                     </button>
                 </div>
             </div>
