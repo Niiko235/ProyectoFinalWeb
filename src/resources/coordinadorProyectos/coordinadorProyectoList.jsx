@@ -26,10 +26,13 @@ const proyectoFilters = [
 const coordinadorProyectoList = () => (
   <List filters={proyectoFilters} bulkActionButtons={false} title="Proyectos" >
     <Datagrid rowClick={(id) => `/admin/proyectos/${id}/vista`}>
-      <TextField source="titulo" />
+      <TextField source="title" />
       <TextField source="area" />
-      <ReferenceField source="docenteId" reference="usuarios" />
-      <TextField source="estado" />
+      <ReferenceField source="leader" reference="users">
+        <TextField source="names" />
+      </ReferenceField>
+
+      <TextField source="status" />
       <EditButton />
     </Datagrid>
   </List>

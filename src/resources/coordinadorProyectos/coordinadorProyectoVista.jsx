@@ -6,7 +6,7 @@ import { useGetOne } from 'react-admin';
 
 const CoordinadorProyectoVista = () => {
   const { id } = useParams();
-  const { data, isLoading, error } = useGetOne('proyectos', { id: Number(id) });
+  const { data, isLoading, error } = useGetOne('projects', { id });
 
   console.log(data);
 
@@ -15,13 +15,13 @@ const CoordinadorProyectoVista = () => {
 
   return (
     <div className="proyecto-vista">
-      <h1>{data.titulo}</h1>
+      <h1>{data.title}</h1>
       <p><strong>Área:</strong> {data.area}</p>
-      <p><strong>Objetivos:</strong> {data.objetivos}</p>
+      <p><strong>Objetivos:</strong> {data.goals}</p>
       <p><strong>Cronograma:</strong> {data.cronograma}</p>
-      <p><strong>Presupuesto:</strong> ${data.presupuesto}</p>
-      <p><strong>Institución:</strong> {data.institucion}</p>
-      <p><strong>Estado:</strong> {data.estado}</p>
+      <p><strong>Presupuesto:</strong> ${data.price}</p>
+      <p><strong>Institución:</strong> {data.institution}</p>
+      <p><strong>Estado:</strong> {data.status}</p>
     </div>
   );
 };
