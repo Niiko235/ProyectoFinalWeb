@@ -6,8 +6,9 @@ const coordinadorProyectoCreate = () => (
       <TextInput source="title" label = 'Titulo'/>
       <TextInput source="area" label = 'Area'/>
       <TextInput multiline source="goals"  label='Objetivos'/>
-      {/* <TextInput multiline source="" /> */}
+      <TextInput multiline source="descripcion" label='Descripcion' />
       <TextInput source="price" label='Presupuesto' />
+      <TextInput source="institution" label='Institucion'/>
 
       <ReferenceInput 
         label='Lider del proyecto'
