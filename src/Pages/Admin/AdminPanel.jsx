@@ -24,6 +24,7 @@ import DataProviderAdmin from './DataProviderAdmin';
 const AdminPanel = () => {
   const { rol, loading, logout} = useAuth();
   const navigate = useNavigate();
+  
 
   if (loading) return <p>Cargando...</p>;
   if (rol !== 'coordinador') return <p>Acceso denegado</p>;

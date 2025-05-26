@@ -43,7 +43,7 @@ const modalStyle = {
     borderRadius: 2,
 };
 
-const HistorialModal = ({ open, onClose, itemsDeEstado }) => {
+const HistorialModal = ({ open, onClose}) => {
     return (
         <Modal
             open={open}
