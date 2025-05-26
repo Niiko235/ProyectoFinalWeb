@@ -6,8 +6,13 @@ import { List, Datagrid, TextField,
 const proyectoFilters = [
   <TextInput label="Buscar por título" source="titulo" alwaysOn />,
   <TextInput label="Institución" source="institucion" />,
-  <ReferenceInput label="Docente" source="docenteId" reference="usuarios">
-    <SelectInput optionText="nombre" />
+  <ReferenceInput
+    label="Docente"
+    source="docenteId"
+    reference="users"
+    filter={{ rol: "profesor" }}
+  >
+    <SelectInput optionText={record => `${record.names} ${record.lastnames}`} />
   </ReferenceInput>,
   <SelectInput
     label="Estado"
