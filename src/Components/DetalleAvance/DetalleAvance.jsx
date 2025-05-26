@@ -25,16 +25,16 @@ const DetalleAvance = ({ open, onClose, avance }) => {
     >
       <Box sx={style}>
         <Typography variant="h6" id="modal-avance-titulo" gutterBottom>
-          {avance.nombre}
+          Descripcion del avance
         </Typography>
-        <Typography variant="body1"><strong>Descripción:</strong> {avance.descr}</Typography>
+        <Typography variant="body1"><strong>Descripción:</strong> {avance.descripcion}</Typography>
         <Typography variant="body2" sx={{ mt: 1 }}><strong>Fecha:</strong> {avance.fecha}</Typography>
 
         {/* Aquí puedes mostrar imágenes si avance.fotos es un arreglo de URLs */}
-        {avance.fotos && avance.fotos.length > 0 && (
+        {avance.archivos && avance.archivos.length > 0 && (
           <div style={{ marginTop: '1rem' }}>
             <Typography variant="body2"><strong>Fotos:</strong></Typography>
-            {avance.fotos.map((foto, idx) => (
+            {avance.archivos.map((foto, idx) => (
               <img
                 key={idx}
                 src={foto}

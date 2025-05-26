@@ -29,7 +29,7 @@ const EstudianteDashboard = () => {
     };
     if (user) fetchProyectos();
 
-    console.log(proyectos);
+    // console.log(proyectos);
     
   }, []);
 

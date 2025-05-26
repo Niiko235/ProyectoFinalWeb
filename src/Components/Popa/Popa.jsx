@@ -6,6 +6,7 @@ import HistorialModal from '../HistoriaModal/HistorialModal';
 import './Popa.css';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Context/authContext';
 
 const Popa = ({ proyectos }) => {
     const { id } = useParams();
@@ -14,25 +15,36 @@ const Popa = ({ proyectos }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [historialOpen, setHistorialOpen] = useState(false);
 
+    const { getAvances } = useAuth();
+
 
     const proyecto = proyectos.find((p) => p.id.toString() === id);
 
     const [avances, setAvances] = useState([]);
+    const [getDescripcion, setGetDescripcion] = useState([]);
+    const [getEstados, setGetEstados] = useState([]);
 
     useEffect(() => {
         const fetchAvances = async () => {
-            const res = await getAvances(proyecto);
+            const res = await getAvances(proyecto);  // funcion para traer avances del auth
+
             setAvances(res);
         };
 
+        if (proyecto) {
+            fetchAvances();
 
-        
-        
-        if (proyecto) fetchAvances();
-
-        // console.log(avances)
-
-    }, []);
+            // Asegura que siempre sean arrays y filtra valores falsy
+            setGetDescripcion([
+                ...((Array.isArray(proyecto.observacionesPrevias) ? proyecto.observacionesPrevias : [])),
+                ...(proyecto.observaciones ? [proyecto.observaciones] : [])
+            ]);
+            setGetEstados([
+                ...((Array.isArray(proyecto.estadosPrevios) ? proyecto.estadosPrevios : [])),
+                ...(proyecto.status ? [proyecto.status] : [])
+            ]);
+        }
+}, [proyecto]);
 
 
     if (!proyecto) return <p>Proyecto no encontrado</p>;
@@ -51,13 +63,8 @@ const Popa = ({ proyectos }) => {
     const cerrarHistorial = () => setHistorialOpen(false);
 
 
-
-    const desc = proyecto.observacionesPrevias.push(proyecto.descripcion);
-    const stats = proyecto.estadosPrevios.push(proyecto.status);
-
-
-    console.log('Descripción:', desc);
-    console.log('Estados:', stats);
+    // console.log('Descripción:', getDescripcion);
+    // console.log('Estados:', getEstados);
     return (
         <>
             <div className='Popa-principal'>
@@ -75,7 +82,7 @@ const Popa = ({ proyectos }) => {
                     <h2>
                         AGREGAR EL ATRIBUTO DESCRIPCION
                     </h2>
-                    <ModalBoton className='Popa-boton' />
+                    <ModalBoton className='Popa-boton' idProyecto = {id} />
                 </div>
                 <div className='Popa-tabla-container'>
                     <table className='Popa-tabla'>
@@ -87,12 +94,12 @@ const Popa = ({ proyectos }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {proyecto.avances && proyecto.avances.length > 0 ? (
-                                proyecto.avances.map((avance, index) => (
+                            {avances && avances.length > 0 ? (
+                               avances.map((avance, index) => (
                                     <tr key={index} onClick={() => handleFilaClick(avance)} style={{ cursor: 'pointer' }}>
-                                        <td>{avance.nombre}</td>
-                                        <td>{avance.descr}</td>
+                                        <td>{(index+1)}</td>
                                         <td>{avance.fecha}</td>
+                                        <td>{avance.descripcion}</td>
                                     </tr>
                                 ))
                             ) : (
@@ -122,8 +129,8 @@ const Popa = ({ proyectos }) => {
             <HistorialModal
                 open={historialOpen}
                 onClose={cerrarHistorial}
-                itemsDeEstado={stats} // Aquí pasas los datos que el modal necesita
-                descripcionDeEstado={desc} // Aquí pasas la descripción del proyecto
+                itemsDeEstado={getEstados} // Aquí pasas los datos que el modal necesita
+                descripcionDeEstado={getDescripcion} // Aquí pasas la descripción del proyecto
             />
         </>
     );
