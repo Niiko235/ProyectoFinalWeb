@@ -1,5 +1,6 @@
 import { AdminContext, Admin, Resource, CustomRoutes } from 'react-admin';
 import { useAuth } from '../../Context/authContext';
+import Imagen from '../../img/imagen.jpg'
 
 import { Route, useNavigate } from 'react-router-dom';
 import Tema from '../../resources/Tema/Tema';
@@ -34,13 +35,15 @@ const AdminPanel = () => {
   };
 
   const Dashboard = () => (<div style={{ padding: '2rem' }}>
-    <h1>Bienvenido al Panel de Coordinador</h1>
-    <p>Desde aquí puedes gestionar proyectos, usuarios y más.</p>
-    <div className='Dashdoce-imagen-cont'>
-      <img src={Imagen} alt="..."  className='Dashdoce-imagen'/>
-    </div>
-    <div className='Dash-Boton'>
-      <button onClick={handleLogout} className='Dash-Admin-boton'>Cerrar sesión</button>
+    <div className='Dashdoce-principal'>
+      <h1>Bienvenido al Panel de Coordinador</h1>
+      <p>Desde aquí puedes gestionar proyectos, usuarios y más.</p>
+      <div className='Dashdoce-imagen-cont'>
+        <img src={Imagen} alt="..."  className='Dashdoce-imagen'/>
+      </div>
+      <div className='Dash-Boton'>
+        <button onClick={handleLogout} className='Dash-Admin-boton'>Cerrar sesión</button>
+      </div>
     </div>
   </div>);
 

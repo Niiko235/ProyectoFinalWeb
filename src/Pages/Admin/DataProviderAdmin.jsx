@@ -9,55 +9,59 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const DataProviderAdmin = {
     
     
-    getList: async (resource, params) => {
-        try {
-            console
-            await delay(300);
+   getList: async (resource, params) => {
+    try {
+        await delay(300);
 
-            let q = collection(db, resource);
+        let q = collection(db, resource);
 
-            // Usa operador correcto para Firestore
-            if(resource === "users") {
-                if(params.filter.rol === "profesor") {
-                    
-                    
-                    q = query(q, where("rol", "==", "profesor"));
-                    const querySnapshot = await getDocs(q);
-                    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    return { data, total: data.length };
-                }else{
-                     // profesores y estudiantes, excluyendo coordinadores
-                    const profesoresSnap = await getDocs(query(collection(db, resource), where("rol", "==", "profesor")));
-                    const estudiantesSnap = await getDocs(query(collection(db, resource), where("rol", "==", "estudiante")));
-
-                    const profesores = profesoresSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    const estudiantes = estudiantesSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-                    const allUsers = [...profesores, ...estudiantes];
-
-                    return {
-                        data: allUsers,
-                        total: allUsers.length,
-                    };
-                }
+        if (resource === "users") {
+            if (params.filter && params.filter.rol) {
+                q = query(q, where("rol", "==", params.filter.rol));
+                const querySnapshot = await getDocs(q);
+                const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                return { data, total: data.length };
+            } else {
+                const querySnapshot = await getDocs(q);
+                const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                return { data, total: data.length };
             }
-
-            const querySnapshot = await getDocs(q);
-
-            const data = querySnapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-
-            return {
-                data,
-                total: data.length,
-            };
-        } catch (error) {
-            console.error("Error en getList:", error);
-            return Promise.reject(error); 
         }
-    },
+
+        const filters = [];
+        const filterMap = {
+            titulo: "title",
+            institucion: "institution",
+            docenteId: "leader",
+            estado: "status",
+        };
+
+        Object.entries(params.filter || {}).forEach(([key, value]) => {
+            if (value && filterMap[key]) {
+                filters.push(where(filterMap[key], "==", value));
+            }
+        });
+
+        if (filters.length > 0) {
+            q = query(q, ...filters);
+        }
+
+        const querySnapshot = await getDocs(q);
+
+        const data = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+
+        return {
+            data,
+            total: data.length,
+        };
+    } catch (error) {
+        console.error("Error en getList:", error);
+        return Promise.reject(error);
+    }
+},
     
    getOne: async (resource, params) => {
         try {

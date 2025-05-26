@@ -106,7 +106,7 @@ const Popa = ({ proyectos }) => {
                 </div>
                 <div className='Popa-descripcion'>
                     <h2>
-                        AGREGAR EL ATRIBUTO DESCRIPCION
+                        {proyecto.descripcion}
                     </h2>
                     <ModalBoton className='Popa-boton' idProyecto={id} />
                 </div>

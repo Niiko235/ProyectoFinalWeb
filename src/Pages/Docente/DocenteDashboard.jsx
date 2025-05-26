@@ -37,16 +37,16 @@ const DocenteDashboard = () => {
   }, []);
 
   const Dashboard = () => (
-    <div className='Dashdoce-principal'>
-      <h1>Bienvenido al Panel del Docente {user?.email} </h1>
-      <p>Desde aquí puedes gestionar proyectos y más.</p>
-      <div className='Dashdoce-imagen-cont'>
-        <img src={Imagen} alt="..." className='Dashdoce-imagen' />
-      </div>
-      <div className='Dash-boton'>
-        <button onClick={handleLogout} className='boton-cerrar-sesion'>Cerrar sesión</button>
-      </div>
+  <div className='Dashdoce-principal'>
+    <h1>Bienvenido al Panel del Docente {user?.email} </h1>
+    <p>Desde aquí puedes gestionar proyectos y más.</p>
+    <div className='Dashdoce-imagen-cont'>
+      <img src={Imagen} alt="..."  className='Dashdoce-imagen'/>
     </div>
+    <div className='Dash-Boton'>
+      <button onClick={handleLogout} className='boton-cerrar-sesion'>Cerrar sesión</button>
+    </div>
+  </div>
   );
 
 
