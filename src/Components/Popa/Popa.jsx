@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { List, Datagrid, TextField, ReferenceField, EditButton } from 'react-admin';
 import ModalBoton from '../Modal/Modal';
-import DetalleAvance from '../DetalleAvance/DetalleAvance'
+import DetalleAvance from '../DetalleAvance/DetalleAvance';
+import HistorialModal from '../HistoriaModal/HistorialModal';
 import './Popa.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +12,8 @@ const Popa = ({ proyectos }) => {
     const navigate = useNavigate();
     const [avanceSeleccionado, setAvanceSeleccionado] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
+    const [historialOpen, setHistorialOpen] = useState(false);
+
 
     const proyecto = proyectos.find((p) => p.id.toString() === id);
 
@@ -26,9 +29,9 @@ const Popa = ({ proyectos }) => {
         setAvanceSeleccionado(null);
     };
 
-    const irAHistorial = () => {
-        navigate(`/estudiante/historial/${id}`);
-    };
+    const abrirHistorial = () => setHistorialOpen(true);
+    const cerrarHistorial = () => setHistorialOpen(false);
+
 
     return (
         <>
@@ -76,17 +79,25 @@ const Popa = ({ proyectos }) => {
                     </table>
                 </div>
                 <div style={{ marginTop: '1rem' }}>
-                <button className="Popa-boton-historial" onClick={irAHistorial}>
-                    Ver Historial de Estados
-                </button>
+                    {/* Botón para abrir el modal de historial */}
+                    <button className='Popa-boton-historial' onClick={abrirHistorial}>
+                        Ver Historial de Estados (Modal)
+                    </button>
+                </div>
             </div>
-            </div>
+
 
 
             <DetalleAvance
                 open={modalOpen}
                 onClose={cerrarModal}
                 avance={avanceSeleccionado}
+            />
+            {/* Modal de historial */}
+            <HistorialModal
+                open={historialOpen}
+                onClose={cerrarHistorial}
+                itemsDeEstado={proyecto.avances} // Aquí pasas los datos que el modal necesita
             />
         </>
     );

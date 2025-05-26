@@ -63,7 +63,7 @@ const EstudianteDashboard = () => {
     <Admin basename="/estudiante" dashboard={Dashboard} theme={Tema}>
       <CustomRoutes>
         <Route path="/compartir/:id" element={<Popa key={proyectos.id} proyectos={proyectos} />} />
-        <Route
+        {/* <Route
           path="/historial/:id"
           element={
             <HistorialEstado
@@ -74,7 +74,7 @@ const EstudianteDashboard = () => {
               ]}
             />
           }
-        />
+        /> */}
       </CustomRoutes>
       <Resource name="proyectos" />
     </Admin>
