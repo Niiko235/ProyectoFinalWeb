@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Popa = ({ proyectos }) => {
+    
     const { id } = useParams();
     const navigate = useNavigate();
     const [avanceSeleccionado, setAvanceSeleccionado] = useState(null);
@@ -79,7 +80,6 @@ const Popa = ({ proyectos }) => {
                     </table>
                 </div>
                 <div style={{ marginTop: '1rem' }}>
-                    {/* Botón para abrir el modal de historial */}
                     <button className='Popa-boton-historial' onClick={abrirHistorial}>
                         Ver Historial de Estados (Modal)
                     </button>
