@@ -19,7 +19,7 @@ const DataProviderAdmin = {
             // Usa operador correcto para Firestore
             if(resource === "users") {
                 if(params.filter.rol === "profesor") {
-                    console.log("Filtrando por rol: profesor");
+                    
                     
                     q = query(q, where("rol", "==", "profesor"));
                     const querySnapshot = await getDocs(q);

@@ -83,7 +83,6 @@ const ModalBoton = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Datos del formulario:', formData);
     // Aquí puedes enviar los datos al backend o manejarlos como quieras
     handleClose(); // Cierra el modal después de guardar
   };

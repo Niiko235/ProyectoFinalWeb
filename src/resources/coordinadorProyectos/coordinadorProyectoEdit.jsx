@@ -1,6 +1,7 @@
 // src/resources/proyectos/ProyectoEdit.jsx
-
+import HistorialModal from '../../Components/HistoriaModal/HistorialModal';
 import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, DateInput, required, ReferenceArrayInput, SelectArrayInput } from 'react-admin';
+
 
 const coordinadorProyectoEdit = () => (
   <Edit title="Cambiar estado del proyecto">
