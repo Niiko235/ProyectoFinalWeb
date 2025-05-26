@@ -29,7 +29,7 @@ const DocenteDashboard = () => {
     <div className='Dashdoce-imagen-cont'>
       <img src={Imagen} alt="..."  className='Dashdoce-imagen'/>
     </div>
-    <div className='Dash-boton'>
+    <div className='Dash-Boton'>
       <button onClick={handleLogout} className='boton-cerrar-sesion'>Cerrar sesión</button>
     </div>
   </div>
