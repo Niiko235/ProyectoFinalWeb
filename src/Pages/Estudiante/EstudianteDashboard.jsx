@@ -2,7 +2,6 @@ import { useAuth } from '../../Context/authContext';
 import { useNavigate } from 'react-router-dom';
 import Tema from '../../resources/Tema/Tema';
 import { Admin, Resource, CustomRoutes } from "react-admin";
-import dataProvider from '../../dataProvider';
 import Imagen from '../../img/imagen.jpg'
 import CardProyect from '../../Components/CardProyec/CardProyec';
 import { useState, useEffect } from 'react';
