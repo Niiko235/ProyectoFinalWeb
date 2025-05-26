@@ -11,13 +11,35 @@ const DataProviderAdmin = {
     
     getList: async (resource, params) => {
         try {
+            console
             await delay(300);
 
             let q = collection(db, resource);
 
             // Usa operador correcto para Firestore
             if(resource === "users") {
-                q = query(q, or(where("rol", "==", "estudiante"), where("rol", "==", "profesor")));
+                if(params.filter.rol === "profesor") {
+                    console.log("Filtrando por rol: profesor");
+                    
+                    q = query(q, where("rol", "==", "profesor"));
+                    const querySnapshot = await getDocs(q);
+                    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    return { data, total: data.length };
+                }else{
+                     // profesores y estudiantes, excluyendo coordinadores
+                    const profesoresSnap = await getDocs(query(collection(db, resource), where("rol", "==", "profesor")));
+                    const estudiantesSnap = await getDocs(query(collection(db, resource), where("rol", "==", "estudiante")));
+
+                    const profesores = profesoresSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    const estudiantes = estudiantesSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                    const allUsers = [...profesores, ...estudiantes];
+
+                    return {
+                        data: allUsers,
+                        total: allUsers.length,
+                    };
+                }
             }
 
             const querySnapshot = await getDocs(q);
@@ -52,69 +74,130 @@ const DataProviderAdmin = {
             return Promise.reject(error); // ✅ capturar errores inesperados
         }
     },
-    
-    create: async (resource, params) => {
+    getMany: async (resource, params) => {
         try {
-            const newUserId = await createUserAsCoordinator(
-                params.data.email,
-                params.data.password,
-                {
-                    dni: parseInt(params.data.dni),
-                    lastnames: params.data.lastnames,
-                    names: params.data.names,
-                    nickname: params.data.nickname,
-                    phone: parseInt(params.data.phone),
-                    rol: params.data.rol === '1' ? "estudiante" : "profesor",
-                    email: params.data.email,
-                    password: params.data.password,
-                }
+            const collectionRef = collection(db, resource);
+            const docs = await Promise.all(
+                params.ids.map(id => getDoc(doc(collectionRef, id)))
             );
 
-            return {
-                data: {
-                    id: newUserId, // ⚠️ importante para React-Admin
-                    ...params.data,
-                },
-            };
+            const data = docs
+                .filter(docSnap => docSnap.exists())
+                .map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+
+            return { data };
         } catch (error) {
-            console.error("Error en create:", error);
-            return Promise.reject(error); // ✅ obligatorio para React-Admin
+            console.error("Error en getMany:", error);
+            return Promise.reject(error);
+        }
+    },
+    
+    create: async (resource, params) => {
+        if(resource === "users") {
+            try {
+                const newUserId = await createUserAsCoordinator(
+                    params.data.email,
+                    params.data.password,
+                    {
+                        dni: parseInt(params.data.dni),
+                        lastnames: params.data.lastnames,
+                        names: params.data.names,
+                        nickname: params.data.nickname,
+                        phone: parseInt(params.data.phone),
+                        rol: params.data.rol === '1' ? "estudiante" : "profesor",
+                        email: params.data.email,
+                        password: params.data.password,
+                    }
+                );
+
+                return {
+                    data: {
+                        id: newUserId, // ⚠️ importante para React-Admin
+                        ...params.data,
+                    },
+                };
+            } catch (error) {
+                console.error("Error en create:", error);
+                return Promise.reject(error); // ✅ obligatorio para React-Admin
+            }
+        }else{
+            try {
+                const newDocRef = await addDoc(collection(db, resource), {
+                    ...params.data,
+                    status: 'Formulacion',
+                    observaciones: 'Inicio del proyecto',
+                    progress: [],
+                    observacionesPrevias: [],
+                    estadosPrevios: [],
+                    team: [],
+                    leader: params.data.leader,
+                });
+
+                return {
+                    data: { id: newDocRef.id, ...params.data },
+                };
+            } catch (error) {
+                console.error("Error en create:", error);
+                return Promise.reject(error); // ✅ obligatorio para React-Admin
+            }
         }
     },
     
     update: async (resource, params) => {
-        const docRefOld = doc(db, resource, params.id);
+       if(resource === "users") {
+            const docRefOld = doc(db, resource, params.id);
     
-        const oldSnapshot = await getDoc(docRefOld); // 🔁 Lectura previa
-        const oldData = oldSnapshot.data(); 
+            const oldSnapshot = await getDoc(docRefOld); // 🔁 Lectura previa
+            const oldData = oldSnapshot.data(); 
 
-        
+            
 
-        const docRef = doc(db, resource, params.id);
-        const nuevosDatos = {
-            ...params.data,
-            rol: params.data.rol === '1' ? "estudiante" : "profesor",
-        };
+            const docRef = doc(db, resource, params.id);
+            const nuevosDatos = {
+                ...params.data,
+                rol: params.data.rol === '1' ? "estudiante" : "profesor",
+            };
 
-        if(oldData.rol !== nuevosDatos.rol && oldData.rol == "profesor") {
-            const proyectosRef = collection(db, "projects");
-            const q = query(proyectosRef, where("leader", "==", params.id));
+            if(oldData.rol !== nuevosDatos.rol && oldData.rol == "profesor") {
+                const proyectosRef = collection(db, "projects");
+                const q = query(proyectosRef, where("leader", "==", params.id));
 
-            const proyectosSnapshot = await getDocs(q);
+                const proyectosSnapshot = await getDocs(q);
 
-             const batch = writeBatch(db); // Para eficiencia
+                const batch = writeBatch(db); // Para eficiencia
 
-            proyectosSnapshot.forEach((doc) => {
-            // Opción 1: Eliminar proyecto completamente
-            // batch.delete(doc.ref);
+                proyectosSnapshot.forEach((doc) => {
+                // Opción 1: Eliminar proyecto completamente
+                // batch.delete(doc.ref);
 
-            // Opción 2: Solo remover al líder (dejar proyecto vivo)
-            batch.update(doc.ref, { leader: "" });
-             });
-            await batch.commit();
+                // Opción 2: Solo remover al líder (dejar proyecto vivo)
+                batch.update(doc.ref, { leader: "" });
+                });
+                await batch.commit();
+            }
+            await updateDoc(docRef, nuevosDatos);
+            return { data: { id: params.id, ...nuevosDatos } };
+        }else{
+            const docRefOld = doc(db, resource, params.id);
+    
+            const oldSnapshot = await getDoc(docRefOld); // 🔁 Lectura previa
+            const oldData = oldSnapshot.data(); 
+
+            const docRef = doc(db, resource, params.id);
+            if(oldData.observaciones !== params.data.observaciones || oldData.status !== params.data.status) {
+                 
+                const nuevosDatos = {
+                    ...params.data,
+                    status: params.data.status,
+                    observaciones: params.data.observaciones,
+                    estadosPrevios: [...oldData.estadosPrevios, oldData.status],
+                    observacionesPrevias: [...oldData.observacionesPrevias, oldData.observaciones],
+                };
+                await updateDoc(docRef, nuevosDatos);
+                return { data: { id: params.id, ...nuevosDatos } };
+            }
+            throw new Error("No se han realizado cambios en el proyecto");
         }
-        await updateDoc(docRef, nuevosDatos);
-        return { data: { id: params.id, ...nuevosDatos } };
     },
     
     delete: async (resource, params) => {

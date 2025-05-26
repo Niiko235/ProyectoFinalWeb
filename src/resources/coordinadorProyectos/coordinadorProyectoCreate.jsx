@@ -3,16 +3,22 @@ import { Create, SimpleForm, TextInput, DateInput, ReferenceInput, SelectInput, 
 const coordinadorProyectoCreate = () => (
   <Create>
     <SimpleForm>
-      <TextInput source="titulo" />
-      <TextInput source="area" />
-      <TextInput multiline source="objetivos" />
-      <TextInput multiline source="cronograma" />
-      <TextInput source="presupuesto" />
+      <TextInput source="title" label = 'Titulo'/>
+      <TextInput source="area" label = 'Area'/>
+      <TextInput multiline source="goals"  label='Objetivos'/>
+      {/* <TextInput multiline source="" /> */}
+      <TextInput source="price" label='Presupuesto' />
 
-      <ReferenceInput source="docenteId" reference="usuarios">
-        <SelectInput optionText="nombre" />
+      <ReferenceInput 
+        label='Lider del proyecto'
+        source="leader"
+        reference="users" 
+
+        filter={{ rol: "profesor" }}
+        >
+        <SelectInput optionText={user => `${user.names} ${user.lastnames} (${user.dni})`} />
       </ReferenceInput>
-      <TextInput source="institucion" />
+      <TextInput source="institution" label = 'Institucion' />
 
     </SimpleForm>
   </Create>

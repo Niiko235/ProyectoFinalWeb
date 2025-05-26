@@ -3,41 +3,43 @@
 import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, DateInput, required, ReferenceArrayInput, SelectArrayInput } from 'react-admin';
 
 const coordinadorProyectoEdit = () => (
-  <Edit title="Editar Proyecto">
+  <Edit title="Cambiar estado del proyecto">
     <SimpleForm>
-      <TextInput disabled source="id" />
+      {/* <TextInput disabled source="id" />
 
       <TextInput source="titulo" validate={required()} />
       <TextInput source="area" />
       <TextInput multiline source="objetivos" />
       <TextInput multiline source="cronograma" />
       <TextInput source="presupuesto" />
-      <TextInput source="institucion" />
+      <TextInput source="institucion" /> */}
 
       {/* Referencia al docente que lo creó */}
-      <ReferenceInput source="docenteId" reference="usuarios">
+      {/* <ReferenceInput source="docenteId" reference="usuarios">
         <SelectInput optionText="nombre" />
-      </ReferenceInput>
+      </ReferenceInput> */}
 
       {/* Observaciones o estado actual */}
-      <TextInput multiline source="observaciones" />
       <SelectInput
-        source="estado"
+        source="status"
         choices={[
-          { id: 'Formulación', name: 'Formulación' },
-          { id: 'Evaluación', name: 'Evaluación' },
+          { id: 'Formulacion', name: 'Formulacion' },
+          { id: 'Evaluacion', name: 'Evaluacion' },
           { id: 'Activo', name: 'Activo' },
           { id: 'Inactivo', name: 'Inactivo' },
           { id: 'Finalizado', name: 'Finalizado' },
         ]}
+        validate={required()}
       />
-      <ReferenceArrayInput
+      <TextInput multiline source="observaciones" />
+      
+      {/* <ReferenceArrayInput
         label="Estudiantes"
         source="estudiantesIds"
         reference="estudiantes"
       >
         <SelectArrayInput optionText="nombre" />
-      </ReferenceArrayInput>
+      </ReferenceArrayInput> */}
     </SimpleForm>
   </Edit>
 );
