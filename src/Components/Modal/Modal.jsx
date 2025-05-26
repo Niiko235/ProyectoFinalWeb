@@ -7,34 +7,22 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useSpring, animated } from '@react-spring/web';
+import { useAuth } from '../../Context/authContext'; // Asegúrate de que la ruta sea correcta
 
 const Fade = React.forwardRef(function Fade(props, ref) {
-  const {
-    children,
-    in: open,
-    onClick,
-    onEnter,
-    onExited,
-    ownerState,
-    ...other
-  } = props;
+  const { children, in: open, onClick, onEnter, onExited, ...other } = props;
   const style = useSpring({
     from: { opacity: 0 },
     to: { opacity: open ? 1 : 0 },
     onStart: () => {
-      if (open && onEnter) {
-        onEnter(null, true);
-      }
+      if (open && onEnter) onEnter(null, true);
     },
     onRest: () => {
-      if (!open && onExited) {
-        onExited(null, true);
-      }
+      if (!open && onExited) onExited(null, true);
     },
   });
 
   return (
-    // @ts-expect-error
     <animated.div ref={ref} style={style} {...other}>
       {React.cloneElement(children, { onClick })}
     </animated.div>
@@ -47,7 +35,6 @@ Fade.propTypes = {
   onClick: PropTypes.any,
   onEnter: PropTypes.func,
   onExited: PropTypes.func,
-  ownerState: PropTypes.any,
 };
 
 const modalStyle = {
@@ -62,30 +49,86 @@ const modalStyle = {
   p: 4,
 };
 
-const ModalBoton = () => {
+
+
+const ModalBoton = ({idProyecto}) => {
+
+  const { crearAvance } = useAuth();
+
   const [open, setOpen] = React.useState(false);
+  const [uploading, setUploading] = React.useState(false);
   const [formData, setFormData] = React.useState({
     fecha: '',
     descripcion: '',
-    archivo: null,
+    archivos: [],
   });
 
+   // Asegúrate de que guardarAvance esté definido en tu contexto
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setFormData({ fecha: '', descripcion: '', archivos: [] });
+  };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
+    if (files) {
+      setFormData((prev) => ({
+        ...prev,
+        archivos: Array.from(files),
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const guardarAvance = ({ fecha, descripcion, archivos }) => {
+    crearAvance(idProyecto, fecha, descripcion, archivos);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Datos del formulario:', formData);
-    // Aquí puedes enviar los datos al backend o manejarlos como quieras
-    handleClose(); // Cierra el modal después de guardar
+
+    if (formData.archivos.length === 0) {
+      alert("Selecciona al menos un archivo.");
+      return;
+    }
+
+    setUploading(true);
+
+    try {
+      const uploadPromises = formData.archivos.map(async (file) => {
+        const dataForm = new FormData();
+        dataForm.append("file", file);
+        dataForm.append("upload_preset", "proyectoWeb");
+        dataForm.append("resource_type", "auto");
+
+        const res = await fetch("https://api.cloudinary.com/v1_1/dmmfoz71f/auto/upload", {
+          method: "POST",
+          body: dataForm,
+        });
+
+        const data = await res.json();
+        return data.secure_url;
+      });
+
+      const urls = await Promise.all(uploadPromises);
+
+      guardarAvance({
+        fecha: formData.fecha,
+        descripcion: formData.descripcion,
+        archivos: urls,
+      });
+
+      handleClose();
+    } catch (error) {
+      console.error("Error al subir archivos:", error);
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -133,17 +176,18 @@ const ModalBoton = () => {
                 sx={{ mb: 2 }}
               />
               <Button variant="outlined" component="label" fullWidth sx={{ mb: 2 }}>
-                Cargar Archivo / Foto
+                Cargar Fotos / Videos
                 <input
                   type="file"
-                  name="archivo"
+                  name="archivos"
                   hidden
+                  multiple
                   onChange={handleChange}
-                  accept="image/*,application/pdf"
+                  accept="image/*,video/*"
                 />
               </Button>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
-                Guardar Avance
+              <Button type="submit" variant="contained" color="primary" fullWidth disabled={uploading}>
+                {uploading ? "Subiendo..." : "Guardar Avance"}
               </Button>
             </form>
           </Box>

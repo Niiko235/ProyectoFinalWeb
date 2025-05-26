@@ -9,12 +9,12 @@ const docenteProyectosCrear = () => {
 
     <Create>
       <SimpleForm>
-        <TextInput source="title" />
-        <TextInput source="area" />
-        <TextInput multiline source="goals" />
-        {/* <TextInput multiline source="cronograma" /> */}
-        <TextInput source="price" />
-        <TextInput source="institution" />
+        <TextInput source="title" label='Titulo' />
+        <TextInput source="area" label='Area' />
+        <TextInput multiline source="goals" label='Objetivos' />
+        <TextInput multiline source="descripcion" label='Descripcion' />
+        <TextInput source="price" label='Presupuesto'/>
+        <TextInput source="institution" label='Institucion'/>
 
         <ReferenceArrayInput
           label="Estudiantes"

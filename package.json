@@ -17,6 +17,8 @@
     "@react-spring/web": "^10.0.1",
     "animate.css": "^4.1.1",
     "firebase": "^11.8.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
     "ra-data-fakerest": "^5.8.1",
     "ra-data-json-server": "^5.8.2",
     "react": "^19.0.0",

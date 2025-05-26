@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { sendPasswordResetEmail, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth, db } from '../Firebase/firabase'
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, collection, getDocs, addDoc } from 'firebase/firestore';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const authContext = createContext();
@@ -137,8 +137,74 @@ export function AuthProvider({ children }) {
     const logout = () => signOut(auth);
 
 
+    const getProyectosMios = async () => {
+        const ref = collection(db, 'projects'); 
+        const snap = await getDocs(ref);               
+
+        const proyectosDelUsuario = snap.docs
+            .filter(doc => {
+                const data = doc.data();
+                return Array.isArray(data.team) && data.team.includes(user.uid);
+            })
+            .map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+
+
+        // console.log('proyectosDelUsuario', proyectosDelUsuario);
+        return proyectosDelUsuario;
+    };
+
+
+    const getAvances = async (proyecto) => {
+        const ref = collection(db, 'progresses');
+        const snap = await getDocs(ref);
+
+        const avancesDelProyecto = snap.docs
+            .filter(doc => {
+                // const data = doc.data();
+                 return proyecto.progress.includes(doc.id);
+            })
+            .map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+
+
+        // console.log('avancesDelProyecto', avancesDelProyecto);
+        return avancesDelProyecto; 
+    };
+
+
+
+    const crearAvance = async (proyectoId, fecha, descripcion, archivos) => {
+        const data = {
+            fecha: fecha,
+            descripcion: descripcion,
+            archivos: archivos,
+            proyectoId: proyectoId,
+        };
+
+        const ref = await addDoc(collection(db, 'progresses'), data);
+
+        // FALTA ESTA LÍNEA:
+        const proyectoRef = doc(db, 'projects', proyectoId);
+
+        // Actualizar el proyecto para incluir el nuevo avance
+        const proyectoSnap = await getDoc(proyectoRef);
+        const proyectoData = proyectoSnap.exists() ? proyectoSnap.data() : {};
+        const progressArray = Array.isArray(proyectoData.progress) ? proyectoData.progress : [];
+
+        await setDoc(proyectoRef, {
+            progress: [...progressArray, ref.id],
+        }, { merge: true });
+
+        return ref;
+    }
+
     return (
-        <authContext.Provider value={{ signup, login, user, logout, loading, registrarUsers, rol, createUserAsCoordinator }}> {/*, loginWithGoogle, resetPassword*/}
+        <authContext.Provider value={{ signup, login, user, logout, loading, registrarUsers, rol, createUserAsCoordinator, getProyectosMios, crearAvance, getAvances }}> {/*, loginWithGoogle, resetPassword*/}
             {children}
         </authContext.Provider>
     )

@@ -18,7 +18,6 @@ import docenteUsuarioEdit from '../../resources/docenteUsuario/docenteUsuarioEdi
 import './AdminPanel.css'
 
 
-import dataProvider from '../../dataProvider';
 import DataProviderAdmin from './DataProviderAdmin';
 
 const AdminPanel = () => {

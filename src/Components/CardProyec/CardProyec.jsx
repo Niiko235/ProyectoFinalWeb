@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import './CardProyec.css';
 
 const CardProyect =({proyecto})=> {
-  console.log(proyecto);
+  // console.log(proyecto);
   return (
     <Card sx={{
         width: 400,

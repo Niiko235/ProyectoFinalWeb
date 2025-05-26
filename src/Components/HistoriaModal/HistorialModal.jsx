@@ -43,7 +43,7 @@ const modalStyle = {
     borderRadius: 2,
 };
 
-const HistorialModal = ({ open, onClose}) => {
+const HistorialModal = ({ open, onClose, itemsDeEstado, descripcionDeEstado }) => {
     return (
         <Modal
             open={open}
@@ -54,11 +54,7 @@ const HistorialModal = ({ open, onClose}) => {
         >
             <Fade in={open}>
                 <Box sx={modalStyle}>
-                    <HistorialEstado itemsDeEstado={[
-                        { id: 1, nombre: 'Inicio', tipo: 'pendiente', descripcion: 'Proyecto creado' },
-                        { id: 2, nombre: 'En curso', tipo: 'avanzando' },
-                        { id: 3, nombre: 'Finalizado', tipo: 'completado', descripcion: 'Proyecto finalizado' }
-                    ]} />
+                    <HistorialEstado itemsDeEstado={itemsDeEstado} descripcionDeEstado={descripcionDeEstado}/>
                 </Box>
             </Fade>
         </Modal>
