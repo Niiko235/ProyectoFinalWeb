@@ -1,6 +1,6 @@
 import { useAuth } from '../../Context/authContext';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import DataProviderDocente from './DataProviderDocente';
 
 import docenteProyectosList from '../../resources/docenteProyectos/docenteProyectosList';
@@ -8,8 +8,9 @@ import docenteProyectosEdit from '../../resources/docenteProyectos/docenteProyec
 import docenteProyectosCrear from '../../resources/docenteProyectos/docenteProyectosCrear';
 import Tema from '../../resources/Tema/Tema';
 import Imagen from '../../img/imagen.jpg';
+import Popa from '../../Components/Popa/Popa';
 
-import { Admin, Resource } from "react-admin";
+import { Admin, Resource, CustomRoutes } from "react-admin";
 import './DocenteDashboard.css'
 
 const DocenteDashboard = () => {
