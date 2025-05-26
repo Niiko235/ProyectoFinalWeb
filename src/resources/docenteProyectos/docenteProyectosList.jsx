@@ -2,7 +2,7 @@ import { List, Datagrid, TextField, EditButton } from 'react-admin';
 
 const docenteProyectosList = () => (
   <List>
-    <Datagrid rowClick={(id) => `/docente/proyects/${id}/vista`}>
+    <Datagrid rowClick="edit">
       <TextField source="title" />
       <TextField source="area" />
       <TextField source="status" />
