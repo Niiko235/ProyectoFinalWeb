@@ -62,7 +62,7 @@ const AdminPanel = () => {
         create={docenteUsuarioCreate}
       />  
 
-      Ruta personalizada
+      // Ruta personalizada
       <CustomRoutes>
         <Route path="/proyectos/:id/vista" element={<CoordinadorProyectoVista />} />
       </CustomRoutes>
