@@ -33,13 +33,13 @@ const EstudianteDashboard = () => {
         est => est.correo.toLowerCase() === user.email.toLowerCase()
       );
 
-      console.log(estudiante);
+      
       if (!estudiante) return;
 
       const { data: proyectosEstudiante } = await dataProvider.getList("proyectos", {
         filter: { loggedUserId: estudiante.id }
       });
-      console.log(proyectosEstudiante);
+      
 
       setProyectos(proyectosEstudiante);
     };

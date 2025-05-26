@@ -12,7 +12,6 @@ import UsuarioList from '../../resources/usuarios/UsuarioList';
 
 
 const Usuarios = () => {
-  console.log('dataProvider', dataProvider)
   return (
     // <div className='usuarios'>
     //   <h1>Usuarios</h1>

@@ -8,7 +8,7 @@ const CoordinadorProyectoVista = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useGetOne('projects', { id });
 
-  console.log(data);
+  // console.log(data);
 
   if (isLoading) return <p>Cargando proyecto...</p>;
   if (error) return <p>Error al cargar proyecto</p>;

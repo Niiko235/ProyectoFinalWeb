@@ -9,7 +9,7 @@ import CardActions from '@mui/material/CardActions';
 import { Link } from 'react-router-dom';
 
 const CardProyect =({proyecto})=> {
-  console.log(proyecto);
+  // console.log(proyecto);
   return (
     <Card sx={{ width: 400, height: 250}}>
       <CardActionArea>
