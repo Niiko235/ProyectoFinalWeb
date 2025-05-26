@@ -1,6 +1,4 @@
-import { Create, SimpleForm, TextInput, DateInput, ReferenceInput, SelectInput, ReferenceArrayInput, SelectArrayInput } from 'react-admin';
-import { useAuth } from '../../Context/authContext'; // Asegúrate de importar correctamente
-import { useEffect, useState } from 'react';
+import { Create, SimpleForm, TextInput, ReferenceArrayInput, SelectArrayInput } from 'react-admin';
 
 
 const docenteProyectosCrear = () => {

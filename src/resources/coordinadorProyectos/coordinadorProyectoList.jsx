@@ -2,7 +2,6 @@ import { List, Datagrid, TextField,
    ReferenceField, EditButton, TextInput,
    ReferenceInput, SelectInput } from 'react-admin';
 
-
 const proyectoFilters = [
   <TextInput label="Buscar por título" source="titulo" alwaysOn />,
   <TextInput label="Institución" source="institucion" />,
@@ -21,7 +20,6 @@ const proyectoFilters = [
     ]}
   />
 ];
-
 
 const coordinadorProyectoList = () => (
   <List filters={proyectoFilters} bulkActionButtons={false} title="Proyectos" >

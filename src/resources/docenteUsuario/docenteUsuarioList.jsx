@@ -7,7 +7,6 @@ const docenteUsuarioList = () => (
       <TextField source="lastnames" />
       <TextField source="dni" />
       <TextField source="rol" />
-      {/* <EmailField source="correo" /> */}
       <EditButton />
       <DeleteButton />
     </Datagrid>

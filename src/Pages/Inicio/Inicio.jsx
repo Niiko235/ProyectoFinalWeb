@@ -8,14 +8,8 @@ const Inicio = () => {
     email: '',
     password: '',
   });
-
   const { login } = useAuth()
-
   const navigate = useNavigate()
-
-  // const [error, setError] = useState(); si vamos a utilizar error toca agregar como componente y usar tailwind
-
-
   const handleCange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value })
   }

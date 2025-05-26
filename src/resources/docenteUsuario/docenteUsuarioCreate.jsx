@@ -1,5 +1,4 @@
-import { Create, SimpleForm, TextInput, DateInput, ReferenceInput, SelectInput, 
-    ReferenceArrayInput, SelectArrayInput, required, 
+import { Create, SimpleForm, TextInput, SelectInput, required, 
     NumberInput} from 'react-admin';
 
 const docenteUsuarioCreate = () => (

@@ -1,4 +1,4 @@
-import { List, Datagrid, TextField, ReferenceField, EditButton } from 'react-admin';
+import { List, Datagrid, TextField, EditButton } from 'react-admin';
 
 const docenteProyectosList = () => (
   <List>

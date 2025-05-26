@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../Context/authContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import './Registro.css'
 
 const Registro = () => {
@@ -18,31 +18,20 @@ const Registro = () => {
 
     const { user, signup, registrarUsers, logout } = useAuth()
     const navigate = useNavigate()
-
-    // const [error, setError] = useState();
-
     const handleCange = ({ target: { name, value } }) =>
         setUserRegister({ ...userRegister, [name]: value })
-    // console.log(userRegister);
-
-
     const handleSubmit = async e => {
         e.preventDefault()
-        // setError('');
         try {
             const userCredentials = await signup(userRegister.email, userRegister.password);
             const uid = userCredentials.user.uid;
             await registrarUsers(userRegister.name, userRegister.lastname, userRegister.dni, userRegister.phone, uid, userRegister.rol, userRegister.nickname, userRegister.email, userRegister.password);
             console.log(user);
-
             navigate('/')
         } catch (error) {
             alert('cagaste');   //mejorar los errores
-
         }
-
     }
-
     return (
         <>
             <form id='Registro-contenedor' onSubmit={handleSubmit}>

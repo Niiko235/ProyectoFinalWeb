@@ -18,9 +18,6 @@ const docenteProyectosShow = () => (
             <TextField source="cronograma" />
             <TextField source="presupuesto" />
             <TextField source="institucion" />
-
-
-            {/* Mostrar nombre del docente usando la referencia */}
             <ReferenceField
                 label="Docente Responsable"
                 source="docenteId"
@@ -28,10 +25,7 @@ const docenteProyectosShow = () => (
             >
                 <TextField source="nombre" />
             </ReferenceField>
-
             <TextField source="observaciones" />
-
-            {/* Estado con etiqueta visual */}
             <ChipField source="estado" />
         </SimpleShowLayout>
     </Show>
