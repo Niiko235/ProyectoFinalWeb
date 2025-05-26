@@ -1,16 +1,34 @@
-.Dash-Boton{
-    display: flex;
-    height: 20vh;
-    align-items: center;
-
-    .Dash-Admin-boton{
-        background-color:#0f2fc0;
-        width: 150px;
-        height: 45px;
-        color: #ffffff;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 15px;
+.Dashdoce-principal{
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    
+    .Dash-Boton{
+        display: flex;
+        /* height: 30%; */
+        align-items: center;
+        justify-content: center;
+        .Dash-Admin-boton{
+            background-color: #0f2fc0;
+            width: 150px;
+            height: 45px;
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 15px;
+        }
     }
+    
+    .Dashdoce-imagen-cont {
+            height: 70%;
+            display: flex;
+            justify-content: center;
+    
+            .Dashdoce-imagen {
+                max-width: 100%;
+                max-height: 100%;
+    
+            }
+        }
 }
