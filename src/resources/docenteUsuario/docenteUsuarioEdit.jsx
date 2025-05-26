@@ -1,5 +1,5 @@
-import { Create, SimpleForm, TextInput, DateInput, ReferenceInput, 
-    SelectInput, ReferenceArrayInput, SelectArrayInput, required,  
+import { SimpleForm, TextInput, 
+    SelectInput, required,  
     Edit} from 'react-admin';
 
 const docenteUsuarioEdit = () => (
@@ -8,10 +8,8 @@ const docenteUsuarioEdit = () => (
       <TextInput source="names" />
       <TextInput source="lastnames" />
       <TextInput source="dni" validate={required()} />
-      {/* <TextInput source="correo" validate={required()} /> */}
       <TextInput source="phone" />
       <TextInput source="nickname" validate={required()}/>
-      {/* <TextInput source="contraseña" validate={required()}/> */}
       <SelectInput
         source="rol"
         choices={[

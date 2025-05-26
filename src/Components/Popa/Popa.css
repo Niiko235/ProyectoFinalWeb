@@ -1,6 +1,6 @@
 .Popa-principal {
-    width: 80vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: #FFFFFF;
 
     .Popa-principal-titulo {
@@ -11,6 +11,7 @@
         display: flex;
         margin: 20px;
         justify-content: space-evenly;
+        flex-wrap: wrap;
 
         .Popa-boton{
             margin: 10px;
@@ -32,10 +33,14 @@
     }
 
     .Popa-tabla thead {
-        background-color: #ffeb3b;
+        background-color: #3985f4;
     }
 
-    .Popa-tabla th,
+
+    .Popa-tabla th{
+        padding: 1rem;
+        color: #FFFFFF;
+    }
     .Popa-tabla td {
         padding: 12px 16px;
         text-align: left;
@@ -54,10 +59,10 @@
 }
 
 .Popa-boton-historial {
-  background-color: #4caf50;
+  background-color: #4440f5;
   color: white;
   padding: 10px 20px;
-  margin-top: 10px;
+  margin: 15px;
   border: none;
   border-radius: 5px;
   font-weight: bold;
@@ -66,5 +71,5 @@
 }
 
 .Popa-boton-historial:hover {
-  background-color: #388e3c;
+  background-color: #3985f4;
 }

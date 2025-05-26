@@ -71,11 +71,11 @@ const DataProviderAdmin = {
             if (docSnap.exists()) {
                 return { data: { id: docSnap.id, ...docSnap.data() } };
             } else {
-                return Promise.reject(new Error("Document not found")); // ✅ aquí está el cambio
+                return Promise.reject(new Error("Document not found")); 
             }
         } catch (error) {
             console.error("Error en getOne:", error);
-            return Promise.reject(error); // ✅ capturar errores inesperados
+            return Promise.reject(error); 
         }
     },
     getMany: async (resource, params) => {
@@ -116,13 +116,13 @@ const DataProviderAdmin = {
 
                 return {
                     data: {
-                        id: newUserId, // ⚠️ importante para React-Admin
+                        id: newUserId,
                         ...params.data,
                     },
                 };
             } catch (error) {
                 console.error("Error en create:", error);
-                return Promise.reject(error); // ✅ obligatorio para React-Admin
+                return Promise.reject(error); 
             }
         }else{
             try {
@@ -142,7 +142,7 @@ const DataProviderAdmin = {
                 };
             } catch (error) {
                 console.error("Error en create:", error);
-                return Promise.reject(error); // ✅ obligatorio para React-Admin
+                return Promise.reject(error); 
             }
         }
     },
@@ -151,7 +151,7 @@ const DataProviderAdmin = {
        if(resource === "users") {
             const docRefOld = doc(db, resource, params.id);
     
-            const oldSnapshot = await getDoc(docRefOld); // 🔁 Lectura previa
+            const oldSnapshot = await getDoc(docRefOld); 
             const oldData = oldSnapshot.data(); 
 
             
@@ -184,7 +184,7 @@ const DataProviderAdmin = {
         }else{
             const docRefOld = doc(db, resource, params.id);
     
-            const oldSnapshot = await getDoc(docRefOld); // 🔁 Lectura previa
+            const oldSnapshot = await getDoc(docRefOld); 
             const oldData = oldSnapshot.data(); 
 
             const docRef = doc(db, resource, params.id);
@@ -229,20 +229,10 @@ const DataProviderAdmin = {
 
     batch.delete(doc(db, resource, params.id));
 
-    await batch.commit(); // ✅ Ejecutar las operaciones en Firestore
+    await batch.commit(); 
 
     return { data: { id: params.id } };
 },
-    
-    // deleteMany: async (resource, params) => {
-    //     const batch = writeBatch(db);
-    //     for (const id of params.ids) {
-    //     const docRef = doc(db, resource, id);
-    //     batch.delete(docRef);
-    //     }
-    //     await batch.commit();
-    //     return { data: params.ids };
-    // },
 };
 
 

@@ -1,0 +1,12 @@
+.card-boton {
+    background-color: #7e01f5;
+    width: 100%;
+    border-radius: 30px;
+
+    .card-link {
+        text-decoration: none;
+        font-size: 20px;
+        color: #FFFFFF;
+
+    }
+}

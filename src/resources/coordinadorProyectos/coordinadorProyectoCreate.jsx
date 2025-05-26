@@ -1,4 +1,4 @@
-import { Create, SimpleForm, TextInput, DateInput, ReferenceInput, SelectInput, ReferenceArrayInput, SelectArrayInput } from 'react-admin';
+import { Create, SimpleForm, TextInput, ReferenceInput, SelectInput} from 'react-admin';
 
 const coordinadorProyectoCreate = () => (
   <Create>

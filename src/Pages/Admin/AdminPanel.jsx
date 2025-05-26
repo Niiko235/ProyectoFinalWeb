@@ -36,6 +36,9 @@ const AdminPanel = () => {
   const Dashboard = () => (<div style={{ padding: '2rem' }}>
     <h1>Bienvenido al Panel de Coordinador</h1>
     <p>Desde aquí puedes gestionar proyectos, usuarios y más.</p>
+    <div className='Dashdoce-imagen-cont'>
+      <img src={Imagen} alt="..."  className='Dashdoce-imagen'/>
+    </div>
     <div className='Dash-Boton'>
       <button onClick={handleLogout} className='Dash-Admin-boton'>Cerrar sesión</button>
     </div>

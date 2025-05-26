@@ -4,12 +4,7 @@ import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc, query, 
 
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-
-
 const DataProviderDocente = (user) => ({
-
-
   getList: async (resource) => {
 
 

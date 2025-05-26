@@ -1,16 +1,16 @@
 .Dashdoce-principal {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: #ffffff;
     padding: 20px;
 
-    /* .Dashcode-proyectos{
+    .Dashdoce-contenedor-cartas{
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
         justify-content: center;
         margin: 20px;
-    } */
+    }
 
     .Dash-boton {
         display: flex;

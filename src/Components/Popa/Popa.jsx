@@ -14,6 +14,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
 const Popa = ({ proyectos }) => {
+    
     const { id } = useParams();
     const navigate = useNavigate();
     const [avanceSeleccionado, setAvanceSeleccionado] = useState(null);
@@ -136,7 +137,6 @@ const Popa = ({ proyectos }) => {
                     </table>
                 </div>
                 <div style={{ marginTop: '1rem' }}>
-                    {/* Botón para abrir el modal de historial */}
                     <button className='Popa-boton-historial' onClick={abrirHistorial}>
                         Ver Historial de Estados (Modal)
                     </button>

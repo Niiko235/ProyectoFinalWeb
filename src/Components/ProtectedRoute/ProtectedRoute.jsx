@@ -1,6 +1,7 @@
 import { useAuth } from "../../Context/authContext";
 import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Progress from "../Progress/Progress";
 
 export function ProtectedRoute({ children, allowedRoles }) {
   const { user, rol, loading } = useAuth();
@@ -10,7 +11,7 @@ export function ProtectedRoute({ children, allowedRoles }) {
     if (!loading) setChecking(false);
   }, [loading]);
 
-  if (loading || checking) return <h1>Cargando...</h1>;
+  if (loading || checking) return <h1><Progress /></h1>;
 
   if (!user) return <Navigate to="/" />;
 

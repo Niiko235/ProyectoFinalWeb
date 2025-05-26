@@ -1,15 +1,8 @@
-// src/resources/coordinadorProyectos/ProyectoVistaPersonalizada.jsx
 import { useParams } from 'react-router-dom';
 import { useGetOne } from 'react-admin';
-
-// import './ProyectoVista.css'; // tu estilo propio
-
 const CoordinadorProyectoVista = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useGetOne('projects', { id });
-
-  // console.log(data);
-
   if (isLoading) return <p>Cargando proyecto...</p>;
   if (error) return <p>Error al cargar proyecto</p>;
 

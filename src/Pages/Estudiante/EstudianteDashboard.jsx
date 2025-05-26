@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import Popa from '../../Components/Popa/Popa';
 import { Route } from 'react-router-dom';
 import HistorialEstado from '../../Components/HistorialEstado/HistorialEstado'
-
+import './EstudianteDashboard.css'
 
 
 const EstudianteDashboard = () => {
@@ -37,9 +37,11 @@ const EstudianteDashboard = () => {
     <div className='Dashdoce-principal'>
       <h1>Hola, {user.email} {rol}</h1>
       <p>Rol: {rol}</p>
-      {proyectos.map(proyecto => (
-        <CardProyect key={proyecto.id} proyecto={proyecto} />
-      ))}
+      <div className='Dashcode-proyectos'>
+        {proyectos.map(proyecto => (
+          <CardProyect key={proyecto.id} proyecto={proyecto} />
+        ))}
+      </div>
       <div className='Dash-boton'>
         <button onClick={handleLogout} className='boton-cerrar-sesion'>Cerrar sesión</button>
       </div>
@@ -50,18 +52,6 @@ const EstudianteDashboard = () => {
     <Admin basename="/estudiante" dashboard={Dashboard} theme={Tema}>
       <CustomRoutes>
         <Route path="/compartir/:id" element={<Popa key={proyectos.id} proyectos={proyectos} />} />
-        {/* <Route
-          path="/historial/:id"
-          element={
-            <HistorialEstado
-              itemsDeEstado={[
-                { id: 1, nombre: 'Inicio', tipo: 'pendiente', descripcion: 'Proyecto creado' },
-                { id: 2, nombre: 'En curso', tipo: 'avanzando' },
-                { id: 3, nombre: 'Finalizado', tipo: 'completado', descripcion: 'Proyecto finalizado' }
-              ]}
-            />
-          }
-        /> */}
       </CustomRoutes>
       <Resource name="proyectos" />
     </Admin>

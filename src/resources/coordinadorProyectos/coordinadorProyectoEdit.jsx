@@ -1,26 +1,9 @@
-// src/resources/proyectos/ProyectoEdit.jsx
 import HistorialModal from '../../Components/HistoriaModal/HistorialModal';
-import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, DateInput, required, ReferenceArrayInput, SelectArrayInput } from 'react-admin';
-
+import { Edit, SimpleForm, TextInput, SelectInput, required} from 'react-admin';
 
 const coordinadorProyectoEdit = () => (
   <Edit title="Cambiar estado del proyecto">
     <SimpleForm>
-      {/* <TextInput disabled source="id" />
-
-      <TextInput source="titulo" validate={required()} />
-      <TextInput source="area" />
-      <TextInput multiline source="objetivos" />
-      <TextInput multiline source="cronograma" />
-      <TextInput source="presupuesto" />
-      <TextInput source="institucion" /> */}
-
-      {/* Referencia al docente que lo creó */}
-      {/* <ReferenceInput source="docenteId" reference="usuarios">
-        <SelectInput optionText="nombre" />
-      </ReferenceInput> */}
-
-      {/* Observaciones o estado actual */}
       <SelectInput
         source="status"
         choices={[
@@ -33,14 +16,6 @@ const coordinadorProyectoEdit = () => (
         validate={required()}
       />
       <TextInput multiline source="observaciones" />
-      
-      {/* <ReferenceArrayInput
-        label="Estudiantes"
-        source="estudiantesIds"
-        reference="estudiantes"
-      >
-        <SelectArrayInput optionText="nombre" />
-      </ReferenceArrayInput> */}
     </SimpleForm>
   </Edit>
 );
