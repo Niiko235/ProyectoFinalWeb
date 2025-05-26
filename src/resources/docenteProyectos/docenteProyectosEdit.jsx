@@ -27,9 +27,6 @@ const docenteProyectosEdit = () => {
                         optionText={user => `${user.names} ${user.lastnames} (${user.dni})`}
                     />
                 </ReferenceArrayInput>
-                <Button variant="contained" onClick={abrirModal} sx={{ mt: 2 }}>
-                    Ver Historial de Estados
-                </Button>
             </SimpleForm>
             <HistorialModal
                 open={modalOpen}
