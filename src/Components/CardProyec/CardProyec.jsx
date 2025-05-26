@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 import './CardProyec.css';
 
 const CardProyect =({proyecto})=> {
-  // console.log(proyecto);
   return (
     <Card sx={{
         width: 400,
@@ -31,9 +30,9 @@ const CardProyect =({proyecto})=> {
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" sx={{
-            color: '#000000', fontSize: 20, fontWeight: 'bold', textAlign: 'center'
+            color: 'black', fontSize: 20, fontWeight: 'bold', textAlign: 'center'
             }}>
-            {proyecto.titulo}
+            {proyecto.title}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -39,9 +39,6 @@ const Registro = () => {
         } catch (error) {
             alert('cagaste');   //mejorar los errores
 
-            // setError(error.message);
-
-
         }
 
     }
